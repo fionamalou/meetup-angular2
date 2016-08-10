@@ -779,6 +779,59 @@ angular.module(10, []); // the module name should be a string
 
 ???
 
-Pour angular 1 
+exemple pour angular 1 
 
 ---
+## Décorateur
+
+- Ajouter pour angular 2 *(AtScript)* à typescript
+- Applicable à une class, attribut, fonction, paramètre
+- Préfixe `@`
+- est une fonction prenant différents argument suivant context
+- peut aussi être paramètré(factory)
+
+???
+Resemble aux annotations en Java, C# et Python
+
+applicable partout sauf sur les construteurs mais les pramètres oui.
+
+https://www.typescriptlang.org/docs/handbook/decorators.html
+
+---
+
+## Décorateur
+``` typescript
+function Log(target:Function, key:string, descriptor:any) {
+    return {
+        value: (...args:any[]) => {
+            console.log(`Call: ${key}`, descriptor);
+            var result = descriptor.value(...args);
+            return result;
+        }
+    };
+}
+
+class RaceService {
+    @Log
+    getRaces() {
+        // call API
+        console.log("do getRaces");
+    }
+    @Log
+    getRace(raceId) {
+        // call API
+        console.log("do getRace whit id: ", raceId);
+    }
+}
+let raceService = new RaceService();
+raceService.getRace(123);
+```
+
+
+
+???
+tsc.cmd main.ts --experimentalDecorators
+
+Descriptor object : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/defineProperty
+
+The Property Descriptor will be undefined if your script target is less than ES5.
