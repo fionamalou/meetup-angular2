@@ -32,9 +32,9 @@ Nommée aussi ES2015 publié en Juin 2015
 
 - Class
 - Constantes
-- arrow functions
-- générateurs
-- paramètres par défaut
+- Arrow functions
+- Générateurs
+- Paramètres par défaut
 - ...
 
 .center[http://es6-features.org/]
@@ -209,7 +209,7 @@ function getPonies(size = defaultSize(), page = size - 1) {
 }
 ```
 ???
-maintenant 0 ou "" sont des valeurs valides, et ne seront pas remplacées par les valeurs par défaut, comme size = size || 10 l’aurait fait. C’est donc plutôt équivalent à size = size === undefined ? 10: size;
+Maintenant 0 ou "" sont des valeurs valides, et ne seront pas remplacées par les valeurs par défaut, comme size = size || 10 l’aurait fait. C’est donc plutôt équivalent à size = size === undefined ? 10: size;
 
 ---
 ## Paramètres optionnels
@@ -224,7 +224,7 @@ let { timeout = 1000 } = httpOptions;
 ---
 ##Rest operator
 
-Permet d'utiliser la liste des arguements **proprement**
+Permet d'utiliser la liste des argusments **proprement**
 #### ES5
 ``` javascript
 function addPonies(ponies) {
@@ -375,7 +375,7 @@ getUser(login)
 
 ## Promise
 
-expose une méthode `then` et `catch` 
+Expose une méthode `then` et `catch` 
 
 ``` javascript
 asynchoneFunction().then(siSucces, siRejetée);
@@ -530,7 +530,7 @@ Côté Google
 .center[![Right-aligned image](images/AtScript_TypeScript.png)]
 
 ???
-Avec la mise a disposistion de TypeScript (open source), la version 1.5 (en 2015) contient les fonctionnalité d'AtScript, qui a été abandonné.
+Avec la mise a disposition de TypeScript (open source), la version 1.5 (en 2015) contient les fonctionnalité d'AtScript, qui a été abandonné.
 
 ---
 # Typescript
@@ -542,9 +542,9 @@ Après la fusion d'AtScript et TypeScript
 ---
 # Typescript
 
-- Extension `.ts` (par convention)
-- Compiler en javascript standard
-- Code générer est très lisible
+- Extension `.ts` (par convention) ou `.tsx` pour du ReactJS
+- Compiler en javascript standard (ES3, ES5, ES2015)
+- Code généré est très lisible
 
 ## Install
 
@@ -596,14 +596,14 @@ function setOnline(user: User): void {
 
 Continuer d'utiliser la nature dynamique de javascript.
 
-Exemple:
+Exemple :
 ``` javascript
 function addPointsToScore(player, points) {
   player.score += points;
 }
 ```
 
-Avec typeScript
+Avec TypeScript
 ``` typescript
 function addPointsToScore(player: { score: number; }, points: number): void {
   player.score += points;
@@ -619,8 +619,8 @@ function addPointsToScore(player: HasScore, points: number): void {
 }
 ```
 ???
-L'objet player doit posséder la propriété scrore.
----
+L'objet player doit posséder la propriété `score`.
+--------------------------------------------------
 ## Parametre optionnel
 
 - Ajouter un `?` après le parametre optionnel
@@ -761,6 +761,7 @@ Vérification à la compilation uniquement
 - avec des bibliothèques externes écrites en JS
 - Interface ecrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped)  (`.d.ts`) 
 - [http://definitelytyped.org/](http://definitelytyped.org/)
+- Ou plus récemment l'outil [Typings](https://github.com/typings/typings) réunissant les dépôts de TSD, NPM et GIT
 - Autonome si elles sont packagées avec npm (depuis TS 1.6)
 
 
@@ -784,11 +785,11 @@ exemple pour angular 1
 ---
 ## Décorateur
 
-- Ajouter pour angular 2 *(AtScript)* à typescript
-- Applicable à une class, attribut, fonction, paramètre
+- Ajouter pour angular 2 *(AtScript)* à Typescript
+- Applicable à une class, attribut, fonction/méthode, paramètre
 - Préfixe `@`
-- est une fonction prenant différents argument suivant context
-- peut aussi être paramètré(factory)
+- Est une fonction prenant différents argument suivant le context
+- Peut aussi être paramètré(factory)
 
 ???
 Resemble aux annotations en Java, C# et Python
