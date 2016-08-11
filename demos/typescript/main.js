@@ -55,6 +55,7 @@ let privatePony = new NamedPonyWithoutShortcut('Rocket', 100);
 console.log(privatePony.name);
 //----------------------------
 function Log(target, key, descriptor) {
+    console.log(target);
     return {
         value: (...args) => {
             console.log(`Call: ${key}`, descriptor);

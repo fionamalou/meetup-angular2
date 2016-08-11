@@ -70,7 +70,7 @@ console.log(privatePony.name);
 
 //----------------------------
 
-function Log(target:Function, key:string, descriptor:any) {
+function Log (target:any, key:string, descriptor:any) {
     return {
         value: (...args:any[]) => {
             console.log(`Call: ${key}`, descriptor);

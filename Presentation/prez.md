@@ -8,7 +8,6 @@ background-image: url(images/angular2.jpg)
 - Introduction
 - ECMAScript 6
 - TypeScript
-- Web Components
 - Angular2
 
 
@@ -789,6 +788,22 @@ exemple pour angular 1
 - Préfixe `@`
 - est une fonction prenant différents argument suivant context
 - peut aussi être paramètré(factory)
+- on peut créer les notres
+
+Exemple Angular 2:
+``` typescript
+@Component({ selector: 'ns-home' })
+class HomeComponent {
+
+  constructor(@Optional() hello: HelloService) {
+    logger.log(hello);
+  }
+
+}
+```
+
+>.center[BabelJS support aussi les décorateur angular.]
+
 
 ???
 Resemble aux annotations en Java, C# et Python
@@ -796,6 +811,8 @@ Resemble aux annotations en Java, C# et Python
 applicable partout sauf sur les construteurs mais les pramètres oui.
 
 https://www.typescriptlang.org/docs/handbook/decorators.html
+
+essayer TypeScript sinon repasser à ES6 avec Babel ou Traceur, ou même ES5 si tu es complètement fou
 
 ---
 
@@ -835,3 +852,88 @@ tsc.cmd main.ts --experimentalDecorators
 Descriptor object : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/defineProperty
 
 The Property Descriptor will be undefined if your script target is less than ES5.
+
+---
+class: center
+ES6 + Typesctipt
+
+Maintenant Angular 2
+
+####Ready?
+![Ready?](images/ready.gif)
+---
+class: center, bottom
+background-image: url(images/angular2.jpg)
+
+---
+
+## Philosophie 
+
+- orienté composants *(Angular1: controller + tempalte, directive )*
+- web moderne: ES6 mais ES5 aussi
+- Utilisation des décorateurs (Typescript, Traceur et Babel)
+- injection de dépendance
+- tests
+- Toujours magique mais fonctionne de manière différente (Zone)
+
+---
+## Aperçu
+
+``` typescript
+import { Component } from '@angular/core';
+import { PonyComponent } from './components';
+import { RacesService } from './services';
+
+@Component({
+  selector: 'ns-race',
+  templateUrl: 'race/race.html',
+  directives: [PonyComponent]
+})
+export class RaceComponent {
+
+  race: any;
+
+  constructor(racesService: RacesService) {
+    racesService.get()
+      .then(race => this.race = race);
+  }
+}
+```
+
+```html
+<div>
+  <h2>{{ race.name }}</h2>
+  <div>{{ race.status }}</div>
+  <div *ngFor="let pony of race.ponies">
+    <ns-pony [pony]="pony"></ns-pony>
+  </div>
+</div>
+```
+
+???
+
+ne pas aller trop loin pour le moment, juste donner un aperçu du code
+
+---
+
+## Le commencement
+
+Avoir Node.js (>4.2) et NPM
+
+Installer typescript et typings de manière globale
+```bash
+npm install -g typescript typings
+```
+
+Init un projet tsc (**T**ype**S**cript **C**ompiler)
+```bash
+tsc --init --target es5 --sourceMap --experimentalDecorators --emitDecoratorMetadata
+```
+
+
+???
+
+typings: The TypeScript Definition Manager.
+
+Not work check tsc version, si elle est inférieur à 1.5 vérifier:
+It turns out C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\; was in my windows system path (I suspect Visual Studio) and so simply removing that from my path sorted the issue.
