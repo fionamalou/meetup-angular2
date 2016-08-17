@@ -921,7 +921,7 @@ ne pas aller trop loin pour le moment, juste donner un aperçu du code
 
 ## Le commencement
 
-Avoir Node.js (>4.2) et NPM
+Avoir Node.js (>4.2) et NPM (>3)
 
 Installer typescript et typings de manière globale
 ```bash
@@ -940,3 +940,508 @@ typings: The TypeScript Definition Manager.
 
 Not work check tsc version, si elle est inférieur à 1.5 vérifier:
 It turns out C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\; was in my windows system path (I suspect Visual Studio) and so simply removing that from my path sorted the issue.
+
+https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+---
+
+## tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "noImplicitAny": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
+Compilation à la sauvegarde
+
+```bash
+tsc --watch
+```
+
+
+---
+## Installation d'Angular
+
+```bash
+npm init
+
+npm install --save @angular/core @angular/compiler @angular/common @angular/platform-browser @angular/platform-browser-dynamic rxjs@5.0.0-beta.6 reflect-metadata zone.js
+```
+
+package.json
+```json
+{
+  "name": "angular2",
+  "dependencies": {
+    "@angular/common": "^2.0.0-rc.5",
+    "@angular/compiler": "^2.0.0-rc.5",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/platform-browser": "^2.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.5",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  }
+  ...
+}
+```
+???
+les différents packages @angular.
+
+reflect-metadata, parce que nous utilisons les décorateurs.
+
+rxjs, une bibliothèque vraiment cool appelée RxJS pour la programmation réactive. On aura un chapitre entier consacré à ce sujet.
+
+zone.js, qui assure la plomberie pour faire tourner notre code dans des zones isolées et y détecter les changements (on y reviendra aussi plus tard).
+
+---
+## Installation d'Angular
+
+```bash
+typings init
+typings install --save --global dt~core-js
+```
+
+Et ajoute les typings dans la section `exclude` du fichier `tsconfig.json` :
+```json
+"exclude": [
+  "node_modules",
+  "typings/index.d.ts",
+  "typings/global"
+]
+```
+???
+
+
+---
+
+background-image: url(images/equipement.gif)
+
+L’outillage est désormais en place, il est temps de créer notre premier composant !
+
+---
+
+## Mon premier composant
+
+- @Component()
+- définir le selecteur
+- importer le core d'angular
+
+>Bonne pratique: préfixer les selecteurs, suffixer le nom des fichier par type.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'ponyracer-app',
+  template: '<h1>PonyRacer</h1>'
+})
+export class PonyRacerAppComponent {
+
+}
+```
+
+---
+## Bootsrap
+
+Il existe plusieurs façon de démarer angular en fonction de l'usage (server, web worker...)
+- importer `@angular/platform-browser-dynamic`
+- Appel de la méthode bootstrap
+
+
+```typescript
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { PonyRacerAppComponent } from './ponyracer-app.component';
+
+bootstrap(PonyRacerAppComponent)
+  .catch(err => console.log(err)); // useful to catch the errors
+```
+
+
+```html
+<body>
+  <ponyracer-app>
+    You will see me while Angular starts the app!
+  </ponyracer-app>
+</body>
+```
+
+---
+## Et les scripts?
+
+- Plus complexe mais plus puissant
+- Exploitation des modules
+- Uniquement disponible à partir d'ES6
+- Utilisation d'un outil [SystemJs](https://github.com/systemjs/systemjs)
+
+```bash
+npm install -save systemjs
+```
+
+???
+
+SystemJS est un petit chargeur de modules : tu l’ajoutes (statiquement) dans ta page HTML, tu lui indiques où sont situés les modules sur le serveur, et tu charges l’un d’eux. Il déterminera automatiquement les dépendances entre les modules, et téléchargera ceux utilisés par ton application.
+
+---
+## Et les scripts?
+
+```html
+<head>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script>
+    System.config({
+      // we want to import modules without writing .js at the end
+      defaultJSExtensions: true,
+      // the app will need the following dependencies
+      map: {
+        '@angular': 'node_modules/@angular',
+        'rxjs': 'node_modules/rxjs'
+      },
+      // angular needs a bit of configuration to point to the main files
+      packages: {
+        '@angular/core': {
+          main: 'index.js'
+        },
+        '@angular/compiler': {
+          main: 'index.js'
+        },
+        '@angular/common': {
+          main: 'index.js'
+        },
+        '@angular/platform-browser': {
+          main: 'index.js'
+        },
+        '@angular/platform-browser-dynamic': {
+          main: 'index.js'
+        }
+      }
+    });
+    // and to finish, let's boot the app!
+    System.import('bootstrap');
+  </script>
+</head>
+```
+
+---
+
+## Templates
+### Interpolation
+
+`{{ 1+2 }} / {{ a+b }} / {{ user.name }} / {{ items[index] }}`
+
+Expressions Angular != expressions JavaScript
+ 
+- **Context**: Les expressions Angular sont définies dans la class du component 
+- **Forgiving**: En javascript, les propriétés non définies renvoient des ReferenceError ou TypeError. Avec Angular, elles renvoient undefined ou null. 
+- **No Control Flow Statements**: Avec Angular, on ne peut pas utiliser les conditions, les boucles ou les exceptions dans les expressions.
+- **Filters**: Les filtres peuvent être utilisés pour formater les données à afficher.
+
+
+### Recommandations : 
+Utiliser des expressions simples et seulement des expressions simples :
+- Data binding, 
+- appels à des fonctions, 
+- comparaison à des expressions booléennes.
+
+---
+
+## Templates
+### Interpolation
+### Nouveauté: Safe Navigation Operator
+Levé d'une erreur si la propriété n'est pas accéssible.
+
+```typescript
+@Component({
+  selector: 'ponyracer-app',
+  // typo: users is not user!
+  template: `
+    <h1>PonyRacer</h1>
+    <h2>Welcome {{users.name}}</h2>
+  `
+})
+export class PonyRacerAppComponent {
+
+  user: any = { name: 'Cédric' };
+
+}
+```
+
+`Cannot read property 'name' of undefined in [{{users.name}} in PonyRacerAppComponent]`
+
+???
+users n'existe pas et rien ne l'indique.
+
+---
+## Templates
+### Interpolation
+### Nouveauté: Safe Navigation Operator
+Et si ma prorpiété est asynchrone ? 
+
+```typescript
+@Component({
+  selector: 'ponyracer-app',
+  // typo: users is not user!
+  template: `
+    <h1>PonyRacer</h1>
+     <h2>Welcome {{user?.name}}</h2>
+  `
+})
+export class PonyRacerAppComponent {
+
+  user: any;
+
+}
+```
+
+---
+## Templates
+## Mon deuxième composant
+
+- Importer la class
+- déclarer dans l'attribut `directive` de `component`
+- utiliser dans le template
+
+
+**si tu ajoutes un composant dans ton template, ajoute-le aussi dans l’attribut directives de ton décorateur `@Component`.**
+
+
+---
+## Templates
+### Le binding
+
+- basé sur les attributs
+
+```html
+<p>{{user.name}}</p>
+```
+
+```html
+<p [textContent]="user.name"></p>
+```
+
+la fin des ng-if, ng-src, ng-show, ng-hide, ng-qqc
+```html
+<div [hidden]="isHidden">Hidden or not</div>
+<option [selected]="isPonySelected" value="Rainbow Dash">Rainbow Dash</option>
+<p [style.color]="foreground">Friendship is Magic</p>
+<ns-pony name="Rainbow Dash"></ns-pony> //non dynamique
+<ns-pony name="{{pony.fullName()}}"></ns-pony>
+<ns-pony [name]="pony.fullName()"></ns-pony>
+```
+
+???
+En Angular 2, on peut écrire dans toutes les propriétés du DOM via des attributs spéciaux sur les éléments HTML, entourés de crochets []. Ça fait bizarre au premier abord, mais en fait c’est du HTML valide (et ça m’a aussi surpris). Un nom d’attribut HTML peut commencer par n’importe quoi, à l’exception de quelques caractères comme un guillemet ", une apostrophe ', un slash /, un égal =, un espace…
+
+---
+## Templates
+### Evènements
+
+- ~~ng-click~~, ~~ng-keyup~~, ~~ng-mousemove~~...
+```html
+<button (click)="onButtonClick()">Click me!</button>
+```
+
+#### Ne pas confondre
+Evaluation:
+```html
+<component [property]="doSomething()"></component>
+```
+Binding d'évènement:
+```html
+<component (event)="doSomething()"></component>
+```
+
+---
+## Templates
+### Variables Locales
+Permet d'accéder à un composant
+
+```html
+<input type="text" #name>
+{{ name.value }}
+
+<input type="text" #name>
+<button (click)="name.focus()">Focus the input</button>
+
+<google-youtube #player></google-youtube>
+<button (click)="player.play()">Play!</button>
+```
+
+---
+## Templates
+### Directives de structure
+- une directive est assez proche d’un composant, mais n’a pas de template. On les utilise pour ajouter un comportement à un élément
+- s’appuient sur l’élément `<template>`
+- celle fournies par le framework sont déjà pré-chargées
+
+```html
+<template>
+  <div>Races list</div>
+</template>
+```
+
+---
+## Templates
+### Directives de structure
+#### ngIf
+Si nous voulons instancier le template seulement lorsqu’une condition est réalisée, alors nous utiliserons la directive
+
+```html
+<template [ngIf]="races.length > 0">
+  <div><h2>Races</h2></div>
+</template>
+```
+--
+Version courte
+```html
+<div *ngIf="races.length > 0"><h2>Races</h2></div>
+```
+
+---
+## Templates
+### Directives de structure
+#### ngFor
+permet d’instancier un template par élément d’une collection.
+
+```html
+<ul>
+  <li *ngFor="let race of races">{{race.name}}</li>
+</ul>
+```
+ajouter even, odd, first, last, index `*ngFor="let pony of ponies; let isEven = even"`
+
+--
+
+Utilise une microsyntaxe
+```html
+<ul>
+  <template ngFor let-race [ngForOf]="races">
+    <li>{{race.name}}</li>
+  </template>
+</ul>
+```
+
+???
+L’élément template pour déclarer un template inline,
+
+La directive NgFor qui lui est appliquée,
+
+La propriété NgForOf où nous fournissons la collection à parcourir,
+
+La variable race à utiliser dans les expressions interpolées, reflétant l’élément courant.
+
+even, un booléen qui sera vrai si l’élément a un index pair
+odd, un booléen qui sera vrai si l’élément a un index impair
+first, un booléen qui sera vrai si l’élément est le premier de la collection
+last, un booléen qui sera vrai si l’élément est le dernier de la collection
+`*ngFor="let pony of ponies; let isEven = even"`
+
+---
+## Templates
+### Directives de structure
+#### ngSwitch
+permet de switcher entre plusieurs templates selon une condition.
+
+```html
+<div [ngSwitch]="messageCount">
+  <p *ngSwitchCase="0">You have no message</p>
+  <p *ngSwitchCase="1">You have a message</p>
+  <p *ngSwitchDefault>You have some messages</p>
+</div>
+```
+
+---
+## Templates
+### Directives standards
+#### ngStyle
+permet changer plusieurs styles en même temps.
+
+```html
+<p [style.color]="foreground">Friendship is Magic</p>
+```
+```html
+<div [ngStyle]="{fontWeight: fontWeight, color: color}">I've got style</div>
+```
+
+---
+## Templates
+### Directives standards
+#### ngClass
+permet d’ajouter ou d’enlever dynamiquement des classes sur un élément.
+
+```html
+<div [class.awesome-div]="isAnAwesomeDiv()">I've got style</div>
+```
+```html
+<div [ngClass]="{'awesome-div': isAnAwesomeDiv(), 'colored-div': isAColoredDiv()}">I've got style</div>
+```
+
+---
+## Templates
+### Syntaxe canonique
+- plus verbeux
+- intéressant si ton moteur de template côté serveur a du mal avec les notations [] ou ()
+
+```html
+<ns-pony [name]="pony.name"></ns-pony>
+<ns-pony bind-name="pony.name"></ns-pony>
+
+<button (click)="onButtonClick()">Click me!</button>
+<button on-click="onButtonClick()">Click me!</button>
+
+<input type="text" ref-name>
+<button on-click="name.focus()">Focus the input</button>
+<input type="text" #name>
+<button (click)="name.focus()">Focus the input</button>
+```
+
+---
+## Templates
+### Résumé
+- `{{}}` pour l’interpolation,
+- `[]` pour le binding de propriété,
+- `()` pour le binding d’événement,
+- `#` pour la déclaration de variable,
+- `*` pour les directives structurelles.
+
+---
+# TP: Mise en pratique
+
+Je veux écrire un composant PoniesComponent, affichant une liste de poneys. Pour l’instant, nous allons afficher une simple liste. La liste devra s’afficher seulement si elle n’est pas vide, et j’aimerais avoir un peu de couleur sur les lignes paires. Et nous voulons pouvoir rafraîchir cette liste d’un simple clic sur un bouton.
+
+--
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'ns-ponies',
+  template: `<ul>
+    <button (click)="refreshPonies()">Refresh</button>
+    <li *ngFor="let pony of ponies; let isEven=even"
+      [style.color]="isEven ? 'green' : 'black'">
+      {{pony.name}}
+    </li>
+  </ul>`
+})
+export class PoniesComponent {
+  ponies: Array<any> = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+
+  refreshPonies() {
+    this.ponies = [{ name: 'Fluttershy' }, { name: 'Rarity' }];
+  }
+}
+```
+
+

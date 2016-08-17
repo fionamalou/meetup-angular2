@@ -1,1 +1,7 @@
 .idea
+/demos/angular/node_modules
+/demos/angular/**/*.js
+/demos/angular/**/*.js.map
+
+/demos/angularCli
+/demos/angular/typings
