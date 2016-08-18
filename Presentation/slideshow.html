@@ -15,6 +15,9 @@
         .remark-slide-content h1 { font-size: 3em; }
         .remark-slide-content h2 { font-size: 2em; }
         .remark-slide-content h3 { font-size: 1.6em; }
+        .remark-slide-content h4 {
+            color: #52dafc;
+        }
         .footnote {
             position: absolute;
             bottom: 3em;
@@ -49,6 +52,21 @@
         .pull-right ~ p {
             clear: both;
         }
+
+        .pull-right img,
+        .pull-right img{
+            max-width: 100%;
+        }
+        .col-larger .pull-left {
+            margin-left: -15px;
+            width: 49%;
+        }
+
+        .col-larger .pull-right {
+            margin-right: -15px;
+            width: 49%;
+        }
+
         #slideshow .slide .content code {
             font-size: 0.8em;
         }
@@ -67,13 +85,17 @@
         }
 
         /* Custom */
+        .remark-slide-number{
+            font-size: 15px;
+        }
         .remark-code {
             display: block;
             padding: 0.5em;
         }
 
         .main-page .main-container,
-        .summary-page .summary-container {
+        .summary-page .summary-container,
+        .end-chapter .end-chapter-container {
             font-family: "Roboto", sans-serif;
             position: absolute;
             top:0px;
@@ -86,9 +108,11 @@
 
         .main-page .remark-slide-number,
         .summary-page .remark-slide-number,
+        .end-page .remark-slide-number,
         .chapter-page .remark-slide-number{
             display: none;
         }
+
 
         /* MainPage */
 
@@ -175,6 +199,7 @@
             text-decoration: underline;
         }
 
+
         /* Chapter */
 
         .chapter-page .chapter-container {
@@ -213,6 +238,24 @@
             margin-bottom: 51px;
         }
 
+        /* EndChapter */
+
+        .end-chapter {
+            font-family: "Roboto", sans-serif;
+            background: #52dafc;
+        }
+
+        .end-chapter .end-chapter-body {
+            height: 580px;
+            width: 100%;
+            top: 20px;
+            background-color: #52dafc;
+            padding:5px;
+            font-size:26pt;
+            line-height:60px;
+            font-weight: bold;
+        }
+
         /* Page Header */
         .page-header {
             margin-left: -50px;
@@ -235,11 +278,25 @@
             letter-spacing: -1px;
         }
 
+        .thin-margin-page-header .page-header {
+            margin-bottom:20px;
+        }
+
+
         /* Two-column layout */
-
-
-        .pull-right img{
-            max-width: 100%;
+        .left-column {
+            color: #777;
+            width: 20%;
+            height: 92%;
+            float: left;
+        }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+            color: #000;
+        }
+        .right-column {
+            width: 75%;
+            float: right;
+            padding-top: 1em;
         }
     </style>
 </head>

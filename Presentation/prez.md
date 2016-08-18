@@ -25,7 +25,7 @@ class: summary-page
 ## Résumé
 
 
-  .summary-body[
+ .summary-body[
 - .summary-item[01] Introduction
 - .summary-item[02] ECMAScript 6
 - .summary-item[03] TypeScript
@@ -109,11 +109,10 @@ Implémentation progressive des navigateurs
   ## ES6 - Let
 ]
 
-L'instruction Let :
-.pull-left[
-- est une variable
-- evite le hoisting ("remontée"), porté du bloc
+L'instruction **let** est une variable. Elle evite le hoisting ("remontée"). Sa portée est limitée au bloc.
 
+.pull-left[
+#### ES5
 ``` javascript
 function getPonyFullName(pony) {
   if (pony.isChampion) {
@@ -122,15 +121,9 @@ function getPonyFullName(pony) {
   }
   return pony.name;
 }
-```
 
-]
---
-.pull-right[
-- Equivaut à :
+// Or
 
-
-``` javascript
 function getPonyFullName(pony) {
   var name;
   if (pony.isChampion) {
@@ -141,12 +134,28 @@ function getPonyFullName(pony) {
   return pony.name;
 }
 ```
+
+]
+--
+.pull-right[
+#### ES6
+
+``` javascript
+function getPonyFullName(pony) {
+  if (pony.isChampion) {
+    let name = 'Champion ' + pony.name;
+    return name;
+  }
+  // name is not accessible here
+  return pony.name;
+}
+```
+
+Remplacera définitivement **var** à long terme !
 ]
 
-.footnote[Remplacera définitivement **var** à long terme !]
-
 ???
-sinon il y a un default dans le code
+sinon il y a un défaut dans le code
 
 
 ---
@@ -156,7 +165,7 @@ sinon il y a un default dans le code
   ## ES6 - Const
 ]
 
-L'instruction const :
+L'instruction **const** :
 - est une constante 
 - porté du bloc comme let
 - uniquement en get
@@ -179,9 +188,18 @@ PONIES = []; // SyntaxError
 ```
 
 ---
-## Affectations déstructurées
-- nouveau raccourci pour créer des objets
-- propriété de l’objet = nom que la variable
+
+.page-header[
+  # 02.4
+  ## ES6 - Affectations déstructurées
+]
+
+.left-column[
+  ### 1er raccourci
+]
+
+.right-column[
+Ce nouveau raccourci permet de créer des objets :
 
 #### ES5
 ``` javascript
@@ -191,7 +209,6 @@ function createPony() {
   return { name: name, color: color };//ES5
 }
 ```
---
 #### ES6
 ``` javascript
 function createPony() {
@@ -200,11 +217,28 @@ function createPony() {
   return { name, color };//ES6
 }
 ```
+.center[Ici la propriété de l’objet = nom de la variable !]
+]
+
+
 
 ---
-## Affectations déstructurées
 
-raccourci pour affecter des variables à partir d’objets ou de tableaux
+class: thin-margin-page-header
+
+.page-header[
+  # 02.4
+  ## ES6 - Affectations déstructurées
+]
+
+.left-column[
+  ### 1er raccourci
+  ### 2e raccourci
+]
+
+.right-column[
+Il permet d'affecter des variables à partir d’objets ou de tableaux.
+
 #### ES5
 ``` javascript
 var httpOptions = { timeout: 2000, isCache: true };
@@ -212,7 +246,7 @@ var httpOptions = { timeout: 2000, isCache: true };
 var httpTimeout = httpOptions.timeout;
 var httpCache = httpOptions.isCache;
 ```
---
+
 #### ES6
 ``` javascript
 let httpOptions = { timeout: 2000, isCache: true };
@@ -220,17 +254,29 @@ let httpOptions = { timeout: 2000, isCache: true };
 let { timeout: httpTimeout, isCache: httpCache } = httpOptions;
 //OR
 let { timeout, isCache } = httpOptions;
-// you now have a variable named 'timeout'
-// and one named 'isCache' with correct values
-//Whit an Array
+// you now have a variable named 'timeout' and 
+// one named 'isCache' with correct values.
+// With an array :
 let timeouts = [1000, 2000, 3000];
 // later
 let [shortTimeout, mediumTimeout] = timeouts;
 ```
+]
 
 ---
-## Affectations déstructurées
+.page-header[
+  # 02.4
+  ## ES6 - Affectations déstructurées
+]
+.left-column[
+  ### 1er raccourci
+  ### 2e raccourci
+  ### Conclusion
+]
+
+.right-column[
 #### Dans la vrai vie
+
 ``` javascript
 function randomPonyInRace() {
   let pony = { name: 'Rainbow Dash' };
@@ -243,12 +289,25 @@ let { position, pony } = randomPonyInRace();
 
 let { pony } = randomPonyInRace();
 ```
+]
+
 ???
 Cette fonctionnalité est pratique pour déclarer plusieurs variables à partir d’un objet retourné par une fonction.
 
 ---
-## Paramètres optionnels
 
+class: thin-margin-page-header
+
+.page-header[
+  # 02.5
+  ## ES6 - Paramètres optionnels
+]
+
+.left-column[
+  ### Fonction
+]
+
+.right-column[
 #### ES5
 ``` javascript
 function getPonies(size, page) {
@@ -260,7 +319,7 @@ function getPonies(size, page) {
   server.get(size, page);
 }
 ```
---
+
 #### ES6
 ``` javascript
 function getPonies(size = 10, page = 1) {
@@ -274,23 +333,44 @@ function getPonies(size = defaultSize(), page = size - 1) {
   //Can use previous parameters
 }
 ```
+]
+
 ???
 Maintenant 0 ou "" sont des valeurs valides, et ne seront pas remplacées par les valeurs par défaut, comme size = size || 10 l’aurait fait. C’est donc plutôt équivalent à size = size === undefined ? 10: size;
 
 ---
-## Paramètres optionnels
-Fonctionne aussi pour les objets
+
+.page-header[
+  # 02.5
+  ## ES6 - Paramètres optionnels
+]
+
+.left-column[
+  ### Fonction
+  ### Objet
+]
+
+.right-column[
+Fonctionne aussi pour les objets :
 ``` javascript
 let { timeout = 1000 } = httpOptions;
 // you now have a variable named 'timeout',
 // with the value of 'httpOptions.timeout' if it exists
 // or 1000 if not
 ```
+]
 
 ---
-##Rest operator
+class: col-larger
 
-Permet d'utiliser la liste des argusments **proprement**
+.page-header[
+  # 02.6
+  ## ES6 - Rest operator
+]
+
+Permet d'utiliser la liste des argusments **proprement**.
+
+.pull-left[
 #### ES5
 ``` javascript
 function addPonies(ponies) {
@@ -301,7 +381,9 @@ function addPonies(ponies) {
 
 addPonies('Rainbow Dash', 'Pinkie Pie');
 ```
+]
 --
+.pull-right[
 #### ES6
 ``` javascript
 function addPonies(...ponies) {
@@ -310,25 +392,29 @@ function addPonies(...ponies) {
   }
 }
 ```
+]
 
-*Ne pas confonfondre avec spread operator ("opérateur d’étalement")*
+.center[*Ne pas confonfondre avec spread operator ("opérateur d’étalement")*]
+.center[`let minPrice = Math.min(...[12,3,5]);`]
 
-`let minPrice = Math.min(...[12,3,5]);`
 ???
 ES5: 
- le paramètre ponies n’est jamais utilisé, et rien n’indique que l’on peut fournir plusieurs poneys.
+ Le paramètre ponies n’est jamais utilisé, et rien n’indique que l’on peut fournir plusieurs poneys.
 
 ES6:
-for …​ of utilisée pour l’itération est aussi une nouveauté d’ES6. Elle permet d’être sûr de n’itérer que sur les valeurs de la collection, et non pas sur ses propriétés comme for …​ in
+ for …​ of utilisée pour l’itération est aussi une nouveauté d’ES6. Elle permet d’être sûr de n’itérer que sur les valeurs de la collection, et non pas sur ses propriétés comme for …​ in
 
 ---
+.page-header[
+  # 02.7
+  ## ES6 - Les Classes
+]
 
-## Classes
+.left-column[
+  ### Constructor / toString()
+]
 
-- Constructeur 
-- toString() 
-
-
+.right-column[
 ``` javascript
 class Pony {
   constructor(color) {
@@ -346,15 +432,23 @@ class Pony {
 let bluePony = new Pony('blue');
 console.log(bluePony.toString()); // blue pony
 ```
+]
+
 ???
 Les littéraux de gabarits de caractères sont délimités par des accents graves seuls (backticks) (\` \`)  et non avec des doubles ou simples quotes. Les templates de gabarits peuvent contenir des éléments de substitution (placeholders). Ceux-ci sont indiqués par le signe dollar ($) et des accolades : ${expression}. 
 
 ---
-## Classes
+.page-header[
+  # 02.7
+  ## ES6 - Les classes
+]
 
-- propriété statique
-- getter et setter
+.left-column[
+  ### Constructor / toString()
+  ### Static / Get & Set
+]
 
+.right-column[
 ``` javascript
 class Pony {
   static defaultSpeed() {
@@ -378,14 +472,22 @@ let pony = new Pony();
 pony.color = 'red';// 'set color red'
 console.log(pony.color);
 ```
+]
 
 
 ---
-## Classes
+.page-header[
+  # 02.7
+  ## ES6 - Les classes
+]
 
-- héritage ~~prototypal~~
-- héritage de classes 
+.left-column[
+  ### Constructor / toString()
+  ### Static / Accesseurs
+  ### Héritage
+]
 
+.right-column[
 ``` javascript
 class Animal {
   constructor(speed) {
@@ -408,16 +510,29 @@ class Pony extends Animal {
 let pony = new Pony(20, 'blue');
 console.log(pony.speed); // 20
 ```
+- Héritage ~~prototypal~~
+- Héritage de classes
+]
 
 ---
-## Promise
+class: thin-margin-page-header
 
-.center[Similaire à Angular 1]
+.page-header[
+  # 02.8
+  ## ES6 - Promise
+]
 
+.left-column[
+  ### Principe
+]
+
+.right-column[
+
+- Similaire à Angular 1
 - Permet de gérer l'asynchone
 - Plus lisible que les callbacks
 
-Avec les callback
+#### Avec les callback
 ``` javascript
 getUser(login, function (user) {
   getRights(user, function (rights) {
@@ -425,9 +540,8 @@ getUser(login, function (user) {
   });
 });
 ```
-Avec les promises
+#### Avec les promises
 ``` javascript
-
 getUser(login)
   .then(function (user) {
     return getRights(user);
@@ -436,23 +550,51 @@ getUser(login)
     updateMenu(rights);
   })
 ```
+]
 
 ---
 
-## Promise
+.page-header[
+  # 02.8
+  ## ES6 - Promise
+]
 
-Expose une méthode `then` et `catch` 
+.left-column[
+  ### Principe
+  ### Méthodes
+]
+
+.right-column[
+
+Expose les méthodes `then` et `catch` 
 
 ``` javascript
 asynchoneFunction().then(siSucces, siRejetée);
 asynchoneFunction().catch(siRejetée); //= .then(undefined, siRejetée)
 ```
 
-3 états:
-Pending (en cours), fulfilled (réalisée), rejected (rejetée)
-### Construstion d'une promise
+3 états :
 
-Nouvelle class Promise
+- Pending (en cours), 
+- Fulfilled (réalisée), 
+- rejected (rejetée)
+]
+
+---
+.page-header[
+  # 02.8
+  ## ES6 - Promise
+]
+
+.left-column[
+  ### Principe
+  ### Méthodes
+  ### Création
+]
+
+.right-column[
+
+Exemple de contruction d'une nouvelle promise (class Promise) :
 
 ``` javascript
 let getUser = function (login) {
@@ -467,43 +609,72 @@ let getUser = function (login) {
   });
 };
 ```
+]
 
 ???
-catch permet de gérer un reject sur une chaine de promise
-
-nouvelle façon d’écrire des APIs, et toutes les bibliothèques vont bientôt les utiliser
+Catch permet de gérer un reject sur une chaine de promise.
+Nouvelle façon d’écrire des APIs, et toutes les bibliothèques vont bientôt les utiliser.
 
 ---
+.page-header[
+  # 02.9
+  ## ES6 - Arrow functions
+]
 
-## Arrow functions
 
-- arrow function `=>`
-- utile pour les callbacks et les fonctions anonymes
-- return est implicite s’il n’y a pas de bloc
-- le this **reste attaché** lexicalement
+- Arrow function `=>`,
+- Utile pour les callbacks et les fonctions anonymes,
+- `return` est implicite s’il n’y a pas de bloc,
+- Le `this` **reste attaché** lexicalement.
 
+.pull-left[
+#### Version longue
 ``` javascript
 getUser(login)
-	.then(user => {
-		console.log(user);
-		return getRights(user);
-	})
-	.then(rights => updateMenu(rights))
+   .then(user => {
+       console.log(user);
+       return getRights(user);
+   })
+   .then(rights => updateMenu(rights))
 ```
+]
+
+.pull-right[
+#### Version raccourcie
+``` javascript
+getUser(login)
+   .then(user => getRights(user))
+   .then(rights => updateMenu(rights))
+```
+]
 
 ???
 le this reste le this de la function parent
 
 ---
 
-## Modules
-Avant:
-- CommonJS (NodeJS) avec une **syntaxe simple**
-- RequiereJS (AMD) pour le **chargement Asynchrone**
+.page-header[
+  # 02.10
+  ## ES6 - Modules
+]
+
+.pull-left[
+#### API ou convention existante
+
+- CommonJS (NodeJS) avec une **syntaxe simple**,
+- RequireJS (AMD) pour le **chargement Asynchrone**
+
+#### Objectifs ES6
+
+- Créer une syntaxe conciliant CommonJS / AMD,
+- Analyse statique du code,
+- Gestion claire des dépendances cycliques
+]
 
 --
 
-Dans races_service.js
+.pull-right[
+Dans `races_service.js`
 ``` javascript
 export function bet(race, pony) {
   // ...
@@ -512,24 +683,33 @@ export function start(race) {
   // ...
 }
 ```
-Dans otherFile.js
+Dans `otherFile.js`
 ``` javascript
 import { bet, start } from './races_service';
 // later
 bet(race, pony1);
 start(race);
 ```
+]
 
- .center[**Fondamentale dans Angular 2**]
+.center[**Fondamentale dans Angular 2**]
 
 ???
 API AMD (Asynchronous Module Definition)
 
 ---
 
-## Modules
-- Utilisation d'un alias
-- Joker `*`
+.page-header[
+  # 02.10
+  ## ES6 - Modules
+]
+
+.pull-left[
+
+#### Import
+
+- Utilisation d'un alias avec `as`,
+- Joker `*` : importe tout !
 
 ``` javascript
 import * as racesService from './races_service';
@@ -537,8 +717,13 @@ import * as racesService from './races_service';
 racesService.bet(race, pony1);
 racesService.start(race);
 ```
+]
 
-- Exporter un seul élément (function, valeurn classe) : `default`
+.pull-right[
+
+#### Export
+
+- Exporter un seul élément (function, valeur ou classe) : `default`
 
 ``` javascript
 // pony.js
@@ -547,21 +732,29 @@ export default class Pony {
 // races_service.js
 import Pony from './pony';
 ```
+]
 
 ???
 
 ---
 
+.page-header[
+  # 02.11
+  ## ES6 - Et les vieux navigateurs ?
+]
 
-# Et les vieux navigateurs?
 
-.center[[Tester la comptibilité ES6: http://kangax.github.io/compat-table/es6/](http://kangax.github.io/compat-table/es6/)]
+#### Compatibilité
 
-## Transpileur
-.center[Ecrire ES6, convertir en ES5]
+Tester la comptibilité ES6 : [http://kangax.github.io/compat-table/es6/](http://kangax.github.io/compat-table/es6/)
+
+#### Transpileur
+
+L'objectif est d'écrire en ES6 puis convertir en ES5 !
 
 - [Traceur](https://github.com/google/traceur-compiler) by Google
 - [BabelJs](https://babeljs.io/) by Sebastian McKenzie
+- [TypeScript](https://www.typescriptlang.org/) by Microsoft
 
 ???
 
@@ -572,12 +765,27 @@ Babeljs produit un code source plus lisible que Traceur
 Angular 2 était d’ailleurs transpilé avec Traceur, avant de basculer en  TypeScript
 
 ---
-class: center
+name: end-chapter
+layout: true
+class: end-chapter
+---
+
+
+.end-chapter-container[
+
+.end-chapter-body[
 # Conclusion
 
 Faite du ES6 et un coup de transpileur dans votre processus de build.
+]
+
+]
+
+
 
 ---
+layout: false
+
 background-image: url(images/typescript.jpg)
 
 ---
@@ -1623,18 +1831,17 @@ npm install moment
 template: chapter-page
 
 .chapter-container[
-  # 04
+  # 05
   ## Outillage 
   ## & Industrialisation
 ]
 
 ---
 
-.page-number[
-    04.1
+.page-header[
+  # 05.1
+  ## Test unitaire
 ]
-
-# Test Unitaire
 
 Permet de verifier des petites portions de code de façon isolé.
 Les outils :
@@ -1644,4 +1851,13 @@ Les outils :
   - Multi-browser
   - Multi-device
   
+---
+
+.page-header[
+  # 05.2
+  ## Test End to End
+]
+
+
+
 
