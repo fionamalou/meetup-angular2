@@ -1,82 +1,258 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Angular 2</title>
-		<style>
-			body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-h1, h2, h3 {
-	font-weight: 400;
-	margin-bottom: 0;
-}
-.remark-slide-content h1 { font-size: 3em; }
-.remark-slide-content h2 { font-size: 2em; }
-.remark-slide-content h3 { font-size: 1.6em; }
-.footnote {
-	position: absolute;
-	bottom: 3em;
-}
-li p { line-height: 1.25em; }
-.red { color: #fa0000; }
-.large { font-size: 2em; }
-a, a > code {
-	color: rgb(249, 38, 114);
-	text-decoration: none;
-}
-code {
-	background: none repeat scroll 0 0 #F8F8FF;
-  border: 1px solid #DEDEDE;
-  border-radius: 3px 	;
-  padding: 0 0.2em;
-}
-.remark-code, .remark-inline-code { font-family: "Bitstream Vera Sans Mono", "Courier", monospace; }
-.remark-code-line-highlighted     { background-color: #373832; }
-.pull-left {
-	float: left;
-	width: 47%;
-}
-.pull-right {
-	float: right;
-	width: 47%;
-}
-.pull-right ~ p {
-	clear: both;
-}
-#slideshow .slide .content code {
-	font-size: 0.8em;
-}
-#slideshow .slide .content pre code {
-	font-size: 0.9em;
-	padding: 15px;
-}
-.main-title, .title {
-	background: #272822;
-	color: #777872;
-	text-shadow: 0 0 20px #333;
-}
-.title h1, .title h2, .main-title h1, .main-title h2 {
-	color: #f3f3f3;
-	line-height: 0.8em;
-}
-/* Custom */
-.remark-code {
-	display: block;
-	padding: 0.5em;
-}
+<head>
+    <meta charset="utf-8" />
+    <title>Angular 2</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto);
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        h1, h2, h3 {
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+        .remark-slide-content h1 { font-size: 3em; }
+        .remark-slide-content h2 { font-size: 2em; }
+        .remark-slide-content h3 { font-size: 1.6em; }
+        .footnote {
+            position: absolute;
+            bottom: 3em;
+            font-style: italic;
+            display: block;
+            width: 87%;
+            text-align: center;
+        }
+        li p { line-height: 1.25em; }
+        .red { color: #fa0000; }
+        .large { font-size: 2em; }
+        a, a > code {
+            color: #52dafc;
+            text-decoration: none;
+        }
+        code {
+            background: none repeat scroll 0 0 #F8F8FF;
+            border: 1px solid #DEDEDE;
+            border-radius: 3px 	;
+            padding: 0 0.2em;
+        }
+        .remark-code, .remark-inline-code { font-family: "Bitstream Vera Sans Mono", "Courier", monospace; }
+        .remark-code-line-highlighted     { background-color: #373832; }
+        .pull-left {
+            float: left;
+            width: 47%;
+        }
+        .pull-right {
+            float: right;
+            width: 47%;
+        }
+        .pull-right ~ p {
+            clear: both;
+        }
+        #slideshow .slide .content code {
+            font-size: 0.8em;
+        }
+        #slideshow .slide .content pre code {
+            font-size: 0.9em;
+            padding: 15px;
+        }
+        .main-title, .title {
+            background: #272822;
+            color: #777872;
+            text-shadow: 0 0 20px #333;
+        }
+        .title h1, .title h2, .main-title h1, .main-title h2 {
+            color: #f3f3f3;
+            line-height: 0.8em;
+        }
 
-		</style>
-	</head>
-	<body>
-		
-		<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
-		<script>
-			var slideshow = remark.create({
-				 sourceUrl: 'prez.md',
- 				 highlightStyle: 'agate'
-			});
-		</script>
-		<script></script>
-	</body>
+        /* Custom */
+        .remark-code {
+            display: block;
+            padding: 0.5em;
+        }
+
+        .main-page .main-container,
+        .summary-page .summary-container {
+            font-family: "Roboto", sans-serif;
+            position: absolute;
+            top:0px;
+            left:0px;
+            width:100%;
+            -ms-transform: rotate(-29deg) translate(100px, 20px); /* IE 9 */
+            -webkit-transform: rotate(-29deg) translate(100px, 20px); /* Safari */
+            transform: rotate(-29deg) translate(280px, 60px);
+        }
+
+        .main-page .remark-slide-number,
+        .summary-page .remark-slide-number,
+        .chapter-page .remark-slide-number{
+            display: none;
+        }
+
+        /* MainPage */
+
+        .main-page h2 {
+            font-size:20px;
+            font-weight: bold;
+            margin-left:-30px;
+        }
+
+        .main-page h2 + h1 {
+            font-family: "Roboto", sans-serif;
+            font-weight: bold;
+            color:#52dafc;
+            font-size: 40pt;
+            letter-spacing: -2px;
+            margin-top:30px;
+            margin-left:-30px;
+        }
+
+        .main-page .main-body {
+            height: 580px;
+            width: 100%;
+            top: 20px;
+            border: 1px solid grey;
+            padding:5px;
+            font-size:26pt;
+            line-height:60px;
+            font-weight: bold;
+            overflow: hidden;
+            margin-top:64px;
+            background-color: #EEEEEE;
+        }
+
+
+        .main-page .main-container img {
+            -ms-transform: rotate(29deg); /* IE 9 */
+            -webkit-transform: rotate(29deg); /* Safari */
+            transform: rotate(29deg);
+            margin:0;
+        }
+
+        /* SummaryPage */
+
+        .summary-page {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .summary-page .summary-container h1 {
+            margin: 0;
+            font-size: 30pt;
+            text-decoration:  underline;
+            letter-spacing: -2px;
+            margin-left:20px;
+        }
+
+        .summary-page .summary-container h2 {
+            font-size: 22pt;
+            letter-spacing: -2px;
+            color:#52dafc;
+            margin: 0;
+            margin-left:20px;
+            margin-bottom:20px;
+        }
+
+        .summary-page .summary-body {
+            height: 580px;
+            width: 100%;
+            top: 20px;
+            background-color: #52dafc;
+            padding:5px;
+            font-size:26pt;
+            line-height:60px;
+            font-weight: bold;
+        }
+
+        .summary-page .summary-body ul {
+            list-style: none;
+            padding-left:15px;
+            margin-top:15px;
+        }
+
+        .summary-page .summary-body ul .summary-item {
+            margin-right: 30px;
+            text-decoration: underline;
+        }
+
+        /* Chapter */
+
+        .chapter-page .chapter-container {
+            position: absolute;
+            top:0px;
+            left:0px;
+            width: 100%;
+            -ms-transform: rotate(-29deg) translate(314px, 185px); /* IE 9 */
+            -webkit-transform: rotate(-29deg) translate(314px, 185px); /* Safari */
+            transform: rotate(-29deg) translate(314px, 185px);
+
+            font-family: "Roboto", sans-serif;
+            background-repeat: repeat;
+            background-image: url('./images/chapter-bg.png');
+
+            height: 700px;
+        }
+
+        .chapter-page .chapter-container h1 {
+            position:absolute;
+            top: -55px;
+            margin: 0;
+            font-size: 30pt;
+            color:#52dafc;
+            text-decoration:  underline;
+            letter-spacing: -2px;
+        }
+
+        .chapter-page .chapter-container h2 {
+            font-weight: bold;
+            color:#52dafc;
+            margin: 0;
+            font-size: 50pt;
+            letter-spacing: -2px;
+            line-height: 60px;
+            margin-bottom: 51px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-left: -50px;
+            font-family: "Roboto", sans-serif;
+            font-weight: bold;
+            margin-bottom:50px;
+        }
+        .page-header h1 {
+            color:#52dafc;
+            text-decoration:  underline;
+            letter-spacing: -1px;
+            font-size: 12pt;
+            margin:0;
+            margin-top:5px;
+        }
+
+        .page-header h2 {
+            margin:0;
+            margin-top:5px;
+            letter-spacing: -1px;
+        }
+
+        /* Two-column layout */
+
+
+        .pull-right img{
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+<script>
+    var slideshow = remark.create({
+        sourceUrl: 'prez.md',
+        highlightStyle: 'agate',
+        ratio: '16:9',
+    });
+</script>
+<script></script>
+</body>
 </html>
