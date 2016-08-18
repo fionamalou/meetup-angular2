@@ -1,50 +1,118 @@
-class: center, bottom
-background-image: url(images/angular2.jpg)
 
-##Plus qu'une simple évolution
+name: main-page
+layout: true
+class: main-page
+---
+## valtech_
+# Angular 2
+
+.main-container[
+.main-body[
+  ![Google logo](images/angular2.jpg "Angular 2")
+]
+]
+
+---
+layout: false
+name: summary-page
+layout: true
+class: summary-page
 ---
 
-# Programme
-- Introduction
-- ECMAScript 6
-- TypeScript
-- Angular2
+.summary-container[
 
+# 00
+## Résumé
+
+
+  .summary-body[
+- .summary-item[01] Introduction
+- .summary-item[02] ECMAScript 6
+- .summary-item[03] TypeScript
+- .summary-item[04] Angular2
+- .summary-item[05] Outillage & Industrialisation
+  ]
+
+]
 
 ---
-# Angular 2 
+name: chapter-page
+layout: true
+class: chapter-page
+---
 
-est conçu pour:
+.chapter-container[
+  # 01
+  ## Introduction
+]
+
+---
+layout: false
+
+.page-header[
+  # 01.1
+  ## Introduction
+]
+
+Angular 2 est conçu pour:
 - ECMAScript 6
 - Web Components
 - Mobile First
 
 ---
-background-image: url(images/es6.jpg)
 
+template: chapter-page
+
+.chapter-container[
+  # 02
+  ## ECMAScript 6 
+  ## ES2015
+]
 
 ---
 
-# ECMAScript 6
+.page-header[
+  # 02.1
+  ## Présentation de ES6
+]
 
-Nommée aussi ES2015 publié en Juin 2015
 
-- Class
-- Constantes
+.pull-left[
+Publié en Juin 2015 et rénommé ES2015. Cette spécification apporte les features suivantes : 
+
+- Scope (var, let)
 - Arrow functions
-- Générateurs
-- Paramètres par défaut
-- ...
+- Paramètre par défaut
+- Agrégation de paramètre
+- Template literals (interpolation)
+- Syntaxe raccourcie
+- Destructuring Assignment
+- Module (Export, import)
+- Classe, héritage, getter/setter
+- Decorator (aka Java annotation)
 
-.center[http://es6-features.org/]
+]
+
+.pull-right[
+  ![ES6](images/es6.jpg)
+]
+
+.footnote[http://es6-features.org/]
 
 ???
 Implémentation progressive des navigateurs
 
 ---
-## Let
+
+.page-header[
+  # 02.2
+  ## ES6 - Let
+]
+
+L'instruction Let :
+.pull-left[
 - est une variable
-- evite le hoisting ("remontée"), proté du bloc
+- evite le hoisting ("remontée"), porté du bloc
 
 ``` javascript
 function getPonyFullName(pony) {
@@ -55,7 +123,12 @@ function getPonyFullName(pony) {
   return pony.name;
 }
 ```
+
+]
 --
+.pull-right[
+- Equivaut à :
+
 
 ``` javascript
 function getPonyFullName(pony) {
@@ -68,30 +141,24 @@ function getPonyFullName(pony) {
   return pony.name;
 }
 ```
+]
 
----
-## Let
+.footnote[Remplacera définitivement **var** à long terme !]
 
-- remplacer définitivement **var** à long terme
-
-``` javascript
-function getPonyFullName(pony) {
-  if (pony.isChampion) {
-    let name = 'Champion ' + pony.name;
-    return name;
-  }
-  // name is not accessible here
-  return pony.name;
-}
-```
 ???
 sinon il y a un default dans le code
 
----
-## Const
 
+---
+
+.page-header[
+  # 02.3
+  ## ES6 - Const
+]
+
+L'instruction const :
 - est une constante 
-- proté du bloc comme let
+- porté du bloc comme let
 - uniquement en get
 
 ``` javascript
@@ -1444,4 +1511,30 @@ export class PoniesComponent {
 }
 ```
 
+
+---
+template: chapter-page
+
+.chapter-container[
+  # 04
+  ## Outillage 
+  ## & Industrialisation
+]
+
+---
+
+.page-number[
+    04.1
+]
+
+# Test Unitaire
+
+Permet de verifier des petites portions de code de façon isolé.
+Les outils :
+
+- Jasmine, notre framework de test unitaire (BDD)
+- Karma, notre runner de test
+  - Multi-browser
+  - Multi-device
+  
 
