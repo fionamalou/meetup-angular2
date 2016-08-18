@@ -1444,4 +1444,111 @@ export class PoniesComponent {
 }
 ```
 
+---
+## Injection de dépendances
+
+Inversion de contrôle:
+- le développement est simplifié
+- le test est simplifié avec des mock
+- a configuration est simplifiée
+
+singleton
+
+//TODO
+
+???
+le développement est simplifié, on exprime juste ce que l’on veut, où on le veut.
+
+le test est simplifié, en permettant de remplacer les dépendances par des versions bouchonnées.
+
+la configuration est simplifiée, en permutant facilement différentes implémentations.
+
+
+---
+## Pipes
+
+- "tuyaux" vient de l'utilisation du caractère `|`
+- utilisable directement dans le html
+- utilisable dans le code (injectable)
+- chainable
+- parametrable `:`
+- json, slice, uppercase, lowercase, replace, number, percent, currency, date, async
+
+equivalent des filtres dans Angular 1
+
+```html
+<p>{{ ponies | slice:0:2 | json }}</p>
+```
+donnera:
+```html
+<p>[ { "name": "Rainbow Dash" }, { "name": "Pinkie Pie" } ]</p>
+```
+
+---
+
+## Pipe
+
+Dans le code:
+
+```typescript
+import { Component } from '@angular/core';
+// you need to import the pipe you want to use
+import { JsonPipe } from '@angular/common';
+
+@Component({
+  selector: 'ns-ponies',
+  template: `<p>{{poniesAsJson}}</p>`
+})
+export class PoniesComponent {
+  ponies: Array<any> = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+
+  poniesAsJson: string;
+
+  // inject the Pipe you want
+  constructor(jsonPipe: JsonPipe) {
+    // and then call the transform method on it
+    this.poniesAsJson = jsonPipe.transform(this.ponies);
+  }
+}
+```
+
+---
+## Pipe
+### Un pipe fait maison
+
+``` typescript
+import { PipeTransform, Pipe } from '@angular/core';
+
+@Pipe({ name: 'fromNow' })
+export class FromNowPipe implements PipeTransform {
+  transform(value, args) {
+    // do something here
+  }
+}
+```
+
+---
+## TP : Pipe
+
+Créer un filtre permettant d’afficher le temps écoulé depuis une action utilisateur (genre "il y a 12 secondes", ou "il y a 3 jours").
+Nous utiliserons la function fromNow de Moment.js pour afficher combien de temps s’est écoulé depuis une date.
+
+```bash
+npm install moment
+```
+
+--
+#### Indice 1:
+- Ajouter à la configuration SystemJS
+- Ajouter l'interface TypeScript
+
+--
+
+#### Indice 2:
+```typescript
+@Component({
+  ...
+  pipes: [FromNowPipe]
+})
+```
 

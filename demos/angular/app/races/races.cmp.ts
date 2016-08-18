@@ -3,6 +3,7 @@
  */
 
 import {Component} from '@angular/core';
+import {RaceService} from "../services/race.service";
 
 
 interface Race {
@@ -18,7 +19,9 @@ interface Race {
 <ul>
 <li *ngFor="let race of races; let i = index">{{i}} - {{race.name}}</li>
 </ul>
-`
+`,
+    // providers: [{provide: RaceService, useClass: RaceService}]
+    providers: [RaceService]
 })
 export class RacesComponent {
 
@@ -26,10 +29,11 @@ export class RacesComponent {
     races:Array<Race> = [];
 
     refreshRaces():void {
-        this.races = [{name: 'Londre'}, {name: 'Paris'}]
+        // this.races = [{name: 'Londre'}, {name: 'Paris'}]
+        this.racesService.list();
     }
 
-    constructor() {
+    constructor(private racesService:RaceService) {
         // console.log(newRaceAvailble);
 
 

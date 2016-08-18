@@ -4,7 +4,8 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "module": "commonjs",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "emitDecoratorMetadata": true
     },
     "exclude": [
         "node_modules",
