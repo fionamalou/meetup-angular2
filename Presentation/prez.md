@@ -781,67 +781,101 @@ Faite du ES6 et un coup de transpileur dans votre processus de build.
 
 ]
 
+---
+layout: false
+template: chapter-page
 
+
+.chapter-container[
+  # 03
+  ## TypeScript
+]
 
 ---
 layout: false
 
-background-image: url(images/typescript.jpg)
+.page-header[
+  # 03.1
+  ## TypeScript
+]
 
----
+.pull-left[
 
-# Typescript
+- Permet le typage de JavaScript,
+- Est un projet de Microsoft (2012),
+- Communauté active.
 
-Typescript:
-- permet le typage de javascript
-- est un projet de Microsoft (2012)
-- communauté active
+#### Côté Google
 
-Côté Google
-- DartJS
-- AtScript pour ajouter des annotations
+- DartJS,
+- AtScript pour ajouter des annotations.
+
 
 .center[![Right-aligned image](images/AtScript_TypeScript.png)]
+
+]
+
+--
+
+.pull-right[
+
+#### Après la fusion d'AtScript et TypeScript
+
+.center[![Right-aligned image](images/es5-es6-typescript-circle-diagram.png)]
+]
 
 ???
 Avec la mise a disposition de TypeScript (open source), la version 1.5 (en 2015) contient les fonctionnalité d'AtScript, qui a été abandonné.
 
 ---
-# Typescript
+.page-header[
+  # 03.1
+  ## TypeScript
+]
 
-Après la fusion d'AtScript et TypeScript
+.pull-left[
 
-.center[![Right-aligned image](images/es5-es6-typescript-circle-diagram.png)]
+#### Principes
+- Extension `.ts` (par convention) ou `.tsx` pour du ReactJS,
+- Compiler en JavaScript standard (ES3, ES5, ES2015),
+- Support des structures CommonJS, AMD et SystemJS,
+- Code généré est très lisible.
 
----
-# Typescript
+]
 
-- Extension `.ts` (par convention) ou `.tsx` pour du ReactJS
-- Compiler en javascript standard (ES3, ES5, ES2015)
-- Code généré est très lisible
-
-## Install
+.pull-right[
+#### Install
 
 ```Bash
 npm install -g typescript
 ```
-## Compile
+#### Compile
 ```Bash
 tsc test.ts
 #sous windows 7:
 tsc.cmd test.ts 
 ```
-
+]
 ---
+.page-header[
+  # 03.2
+  ## TypeScript - Typage
+]
 
-## Typage
 `let variable: type;`
 
-- Basics: boolean, number, string, array
-- Autres: any, Class, Enum ,Tuple, Void
-- Mix: number|boolean
-- Les basics peuvent être définit à l'initialisation
+.pull-left[
 
+- **Basics** : boolean, number, string, array
+- **Autres** : any, Class, Enum ,Tuple, Void
+- **Mix** : number | boolean
+
+
+*Les **basics** peuvent être définit à l'initialisation !*
+
+]
+
+.pull-right[
 ``` typescript
 let isDone: boolean = false;
 let name = "Toto" //name:string
@@ -861,29 +895,41 @@ function setAfk(user: User): User {
 function setOnline(user: User): void {
   user.status = Color.Green;
 }
-
 ```
-
+]
 ---
+class: thin-margin-page-header
 
-## Interfaces
+.page-header[
+  # 03.3
+  ## TypeScript - Interfaces
+]
 
-Continuer d'utiliser la nature dynamique de javascript.
+.pull-left[
+#### Objectifs
 
-Exemple :
+- Continuer d'utiliser la nature dynamique de JavaScript,
+- Décrire et typer les librairies ou frameworks JavaScript pré-existant.
+]
+.pull-right[
+#### Exemple
 ``` javascript
 function addPointsToScore(player, points) {
   player.score += points;
 }
 ```
+]
 
-Avec TypeScript
+.clearfix[
+#### Avec TypeScript
 ``` typescript
 function addPointsToScore(player: { score: number; }, points: number): void {
   player.score += points;
 }
 ```
-Ou en la nommant
+]
+
+#### Ou en la nommant
 ``` typescript
 interface HasScore {
   score: number;
@@ -897,9 +943,12 @@ L'objet player doit posséder la propriété `score`.
 
 ---
 
-## Parametre optionnel
+.page-header[
+  # 03.4
+  ## TypeScript - Paramètre optionnel
+]
 
-- Ajouter un `?` après le parametre optionnel
+#### Ajouter un `?` après le paramètre optionnel
 
 
 ``` typescript
@@ -912,7 +961,7 @@ addPointsToScore(player);
 ```
 
 --
-- Ne peut pas avoir de valeur par défaut
+#### Ne peut avoir de valeur par défaut
 
 ``` typescript
 function buildName(firstName: string, lastName = "Smith") {
@@ -929,16 +978,28 @@ let result3 = buildName("Bob", "Adams", "Sr.");
 ```
 
 ---
-## Et une fonction en paramètre ?
+.page-header[
+  # 03.4
+  ## TypeScript - Fonction en paramètre
+]
 
+.pull-left[
+#### Exemple JavaScript
 ``` javascript
 function startRunning(pony) {
   pony.run(10);
 }
 ```
+]
 --
 
- TP: Avez tous ce que l'on vient de voir, convertissez cette fonction pour typescript et lancez la.
+.pull-right[
+
+#### Exercice !
+
+*Avec tous ce que l'on vient de voir, convertissez cette fonction en version TypeScript et lancez-la.*
+
+]
 
 ???
 
@@ -950,6 +1011,8 @@ Utilsation de :
 Run(distance) écrit juste la distance parcourue dans la console.
 
 --
+
+.clearfix[
 #### Solution
 ``` typescript
 interface CanRun {
@@ -965,12 +1028,23 @@ let pony = {
 startRunning(pony);
 
 ```
+]
 
 ---
-## Classes
 
-- Une **classe** peut implémenter une ou plusieurs interfaces
-- Une **interface** peut etendre une ou plusieurs interfaces
+.page-header[
+  # 03.5
+  ## TypeScript - Les classes
+]
+
+.left-column[
+    ### Principes
+]
+
+.right-column[
+
+- Une **classe** peut implémenter une ou plusieurs interfaces,
+- Une **interface** peut étendre une ou plusieurs interfaces.
 
 ``` typescript
 interface Animal extends CanRun, CanEat {}
@@ -984,12 +1058,25 @@ class Pony implements Animal {
   }
 }
 ```
----
-## Attribut Private/Public
+]
 
-- L'attibut `private` ne sera pas accessible depuis l'exterieur de la classe
-- Vérification à la compilation
-- Peut être définie dans le constructeur
+---
+
+.page-header[
+  # 03.5
+  ## TypeScript - Les classes
+]
+
+.left-column[
+
+   ### Principes
+   ### Private/Public
+    
+]
+
+.right-column[
+
+#### Définition sur l'attribut
 
 ``` typescript
 class NamedPonyWithoutShortcut {
@@ -1007,6 +1094,31 @@ class NamedPonyWithoutShortcut {
 }
 ```
 
+*L'attribut `private` ne sera pas accessible depuis l'exterieur de la classe !*
+
+]
+
+
+---
+
+.page-header[
+  # 03.5
+  ## TypeScript - Les classes
+]
+
+.left-column[
+
+   ### Principes
+   ### Private/Public
+    
+]
+
+.right-column[
+
+#### Version raccourcie
+
+L'instruction `private` peut être définie dans le constructeur :
+
 ``` typescript
 class NamedPony {
   constructor(public name: string, private speed: number) {
@@ -1017,34 +1129,69 @@ class NamedPony {
   }
 }
 ```
+]
 
 ???
 Ces raccourcis sont très pratiques et nous allons beaucoup les utiliser en Angular 2 !
 
 ---
 count: false
-## Attribut Private/Public
-###Les variables privées en Javascript
+
+.page-header.thin-xs[
+  # 03.5
+  ## TypeScript - Les classes
+]
+
+.left-column[
+
+   ### Principes
+   ### Private/Public
+    
+]
+
+.right-column[
+
+#### Attention !
+
+- Vérification du type seulement à la compilation,
+- À l'exécution...
+
+.center[
 ![Les variables privées en Javascript](images/privateJavascript.jpg)
+]
+]
 
 ???
 
 Vérification à la compilation uniquement
 
 ---
-## Utiliser d’autres bibliothèques
 
-- avec des bibliothèques externes écrites en JS
-- Interface ecrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped)  (`.d.ts`) 
-- [http://definitelytyped.org/](http://definitelytyped.org/)
-- Ou plus récemment l'outil [Typings](https://github.com/typings/typings) réunissant les dépôts de TSD, NPM et GIT
-- Autonome si elles sont packagées avec npm (depuis TS 1.6)
+.page-header[
+  # 03.6
+  ## TypeScript - Utiliser d’autres bibliothèques
+]
 
+.pull-left[
 
+#### Les ambient files definition `.d.ts`
+
+- S'utilise avec des bibliothèques externes écrites en JS,
+- Permet de typer du code JavaScript via les interfaces TypeScript,
+- Interface ecrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped),
+- Ou TSD [http://definitelytyped.org/](http://definitelytyped.org/),
+- Ou plus récemment l'outil [Typings](https://github.com/typings/typings) réunissant les dépôts de TSD, NPM et GIT,
+- Autonome si elles sont packagées avec npm (depuis TS 1.6).
+]
+
+.pull-right[
+#### Utilisation avec Typings
 ``` bash
 npm install --global typings
 typings install --save --ambient angular
 ```
+
+#### Référencement
 
 ``` typescript
 /// <reference path="angular.d.ts" />
@@ -1053,22 +1200,36 @@ angular.module(10, []); // the module name should be a string
 // Argument of type 'number' is not 
 //assignable to parameter of type 'string'.
 ```
+*Facultatif depuis TS 1.6 !*
+]
 
 ???
 
-exemple pour angular 1 
+Exemple pour angular 1 
 
 ---
-## Décorateur
+.page-header.thin-xs[
+  # 03.7
+  ## TypeScript - Les décorateurs
+]
 
-- Ajouter pour angular 2 *(AtScript)* à Typescript
-- Applicable à une class, attribut, fonction/méthode, paramètre
-- Préfixe `@`
-- Est une fonction prenant différents argument suivant le context
-- Peut aussi être paramètré(factory)
-- on peut créer les notres
+.left-column[
 
-Exemple Angular 2:
+   ### Principes
+    
+]
+
+.right-column[
+#### Principes
+
+- Ajouter pour angular 2 *(AtScript)* à TypeScript,
+- Applicable à une class, attribut, fonction/méthode, paramètre,
+- Préfixé par `@`,
+- Est une fonction prenant différents argument suivant le context,
+- Peut aussi être paramètré (factory),
+- On peut créer nos propres décorateurs.
+
+#### Exemple Angular 2
 ``` typescript
 @Component({ selector: 'ns-home' })
 class HomeComponent {
@@ -1080,21 +1241,34 @@ class HomeComponent {
 }
 ```
 
->.center[BabelJS support aussi les décorateur angular.]
+>.center[*BabelJS supporte aussi les décorateurs Angular.*]
 
+]
 
 ???
 Resemble aux annotations en Java, C# et Python
 
-applicable partout sauf sur les construteurs mais les pramètres oui.
+Applicable partout sauf sur les construteurs mais les paramètres oui.
 
 https://www.typescriptlang.org/docs/handbook/decorators.html
 
 essayer TypeScript sinon repasser à ES6 avec Babel ou Traceur, ou même ES5 si tu es complètement fou
 
 ---
+.page-header.thin-xs[
+  # 03.7
+  ## TypeScript - Les décorateurs
+]
 
-## Décorateur
+.left-column[
+
+   ### Principes
+   ### Déclaration
+    
+]
+
+.right-column[
+#### Déclaration d'un décorateur custom
 ``` typescript
 function Log(target:Function, key:string, descriptor:any) {
     return {
@@ -1121,7 +1295,7 @@ class RaceService {
 let raceService = new RaceService();
 raceService.getRace(123);
 ```
-
+]
 
 
 ???
@@ -1132,16 +1306,31 @@ Descriptor object : https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 The Property Descriptor will be undefined if your script target is less than ES5.
 
 ---
-class: center
-ES6 + Typesctipt
+template: end-chapter
 
-Maintenant Angular 2
+.end-chapter-container[
 
-####Ready?
+.end-chapter-body[
+
+# ES6 + TypeScript
+Maintenant Angular 2. Ready ?
+
+.center[
 ![Ready?](images/ready.gif)
+]
+
+]
+]
+
+
 ---
-class: center, bottom
-background-image: url(images/angular2.jpg)
+template: chapter-page
+
+
+.chapter-container[
+  # 04
+  ## Angular 2
+]
 
 ---
 

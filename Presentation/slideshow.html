@@ -53,6 +53,15 @@
             clear: both;
         }
 
+        .pull-right ~ br {
+            clear: both;
+            height:1px;
+        }
+
+        .clearfix{
+            clear: both;
+        }
+
         .pull-right img,
         .pull-right img{
             max-width: 100%;
@@ -101,14 +110,14 @@
             top:0px;
             left:0px;
             width:100%;
-            -ms-transform: rotate(-29deg) translate(100px, 20px); /* IE 9 */
-            -webkit-transform: rotate(-29deg) translate(100px, 20px); /* Safari */
+            -ms-transform: rotate(-29deg) translate(280px, 60px); /* IE 9 */
+            -webkit-transform: rotate(-29deg) translate(280px, 60px); /* Safari */
             transform: rotate(-29deg) translate(280px, 60px);
         }
 
         .main-page .remark-slide-number,
         .summary-page .remark-slide-number,
-        .end-page .remark-slide-number,
+        .end-chapter .remark-slide-number,
         .chapter-page .remark-slide-number{
             display: none;
         }
@@ -245,15 +254,28 @@
             background: #52dafc;
         }
 
-        .end-chapter .end-chapter-body {
+        .end-chapter .end-chapter-container {
             height: 580px;
             width: 100%;
-            top: 20px;
-            background-color: #52dafc;
+            background-color: #98e9fd;
             padding:5px;
             font-size:26pt;
             line-height:60px;
             font-weight: bold;
+            top:100px;
+            left: 20px;
+        }
+
+        .end-chapter .end-chapter-body {
+            -ms-transform: rotate(29deg) translate(-140px, 80px); /* IE 9 */
+            -webkit-transform: rotate(29deg) translate(-140px, 80px); /* Safari */
+            transform: rotate(29deg) translate(-140px, 80px);
+            width: 80%;
+            color:white;
+        }
+
+        .end-chapter .end-chapter-body h1 {
+            letter-spacing: -5px;
         }
 
         /* Page Header */
@@ -261,8 +283,17 @@
             margin-left: -50px;
             font-family: "Roboto", sans-serif;
             font-weight: bold;
-            margin-bottom:50px;
+            margin-bottom:35px;
         }
+
+        .page-header.thin {
+            margin-bottom:20px;
+        }
+
+        .page-header.thin-xs {
+            margin-bottom:5px;
+        }
+
         .page-header h1 {
             color:#52dafc;
             text-decoration:  underline;
