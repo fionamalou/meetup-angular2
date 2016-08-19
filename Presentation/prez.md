@@ -440,7 +440,7 @@ Les littéraux de gabarits de caractères sont délimités par des accents grave
 ---
 .page-header[
   # 02.7
-  ## ES6 - Les classes
+  ## ES6 - Les Classes
 ]
 
 .left-column[
@@ -478,7 +478,7 @@ console.log(pony.color);
 ---
 .page-header[
   # 02.7
-  ## ES6 - Les classes
+  ## ES6 - Les Classes
 ]
 
 .left-column[
