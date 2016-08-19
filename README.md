@@ -31,3 +31,9 @@ Présentateurs :
 
 * Nicolas Boe - Toulouse, 
 * Romain Lenzotti - Paris
+
+# Usage
+
+Pressing C will open a cloned view of the current slideshow in a new browser window.
+
+Pressing P will toggle presenter mode.

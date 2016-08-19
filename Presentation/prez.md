@@ -1977,7 +1977,7 @@ export class PoniesComponent {
 ```
 
 ---
-## Pipe
+## Pipes
 ### Un pipe fait maison
 
 ``` typescript
@@ -1992,7 +1992,7 @@ export class FromNowPipe implements PipeTransform {
 ```
 
 ---
-## TP : Pipe
+## TP : Pipes
 
 Créer un filtre permettant d’afficher le temps écoulé depuis une action utilisateur (genre "il y a 12 secondes", ou "il y a 3 jours").
 Nous utiliserons la function fromNow de Moment.js pour afficher combien de temps s’est écoulé depuis une date.
