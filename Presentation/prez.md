@@ -2017,6 +2017,123 @@ npm install moment
 ```
 
 ---
+## Solution : Pipes 1/3
+SystemJS:
+``` json
+map: {
+  'angular2': 'node_modules/angular2',
+  'rxjs': 'node_modules/rxjs',
+  'moment': 'node_modules/moment/moment'
+}
+```
+
+Dans la console:
+```bash
+typings install --save --ambient moment-node
+```
+
+---
+## Solution : Pipes 2/3
+fromNow.pipe.ts:
+``` typescript
+import { PipeTransform, Pipe } from '@angular/core';
+import * as moment from 'moment';
+
+@Pipe({ name: 'fromNow' })
+export class FromNowPipe implements PipeTransform {
+  transform(value, args) {
+    return moment(value).fromNow();
+  }
+}
+```
+
+---
+## Solution : Pipes 3/3
+useFromNow.cmp.ts:
+``` typescript
+@Component({
+  selector: 'ns-test',
+  template: `
+  <p>{{ birthday | fromNow }}</p>
+  <!-- will display 'one month ago' -->
+  `,
+  pipes: [FromNowPipe]
+})
+class TestComponent {
+  birthday: Date = new Date('2015-07-16T15:30:00');
+}
+```
+
+
+---
+## Programmation réactive
+
+//TODO
+
+---
+## Directives
+
+- Une directive est très semblable à un composant, sauf qu’elle n’a pas de template
+- la classe Component hérite de la classe Directive dans le framework
+- `@Directive`
+- Selecteur css:
+  + element : `footer`
+  + class: `.alert`
+  + attribut: `[color]` avec une valeur `[color=red]`
+
+``` typescript
+@Directive({
+  selector: '[color],footer.alert'
+})
+export class DoNothingDirective {
+
+  constructor() {
+    console.log('Do nothing directive');
+  }
+}
+
+```
+
+???
+selecteur par class à éviter
+
+Les sélecteurs CSS à base de descendants, de frères, ou d’identifiants, et les pseudo-sélecteurs (autres que :not) ne sont pas supportés.
+
+
+Ne nomme pas tes sélecteurs avec un préfixe bind-, on-, let- ou ref- : ils ont une autre signification pour le parseur, car ils font partie de la syntaxe canonique des templates.
+
+---
+## Directives et les paramètres
+
+- un binding (`=`): utiliser `[]`
+- une valeur (`@`): utiliser seulement l'attribut
+- besoin d'un watch: utiliser le setter `set attribut(value)`
+
+2 façon de faire:
+.pull-left[
+``` typescript
+@Directive({
+  selector: '[loggable]',
+  inputs: ['text: logText']
+})
+export class SimpleTextDirective {
+}
+
+```
+]
+.pull-right[
+``` typescript
+@Directive({
+  selector: '[loggable]'
+})
+export class InputDecoratorDirective {
+  @Input('logText') text: string;
+}
+
+```
+]
+
+---
 template: chapter-page
 
 .chapter-container[
