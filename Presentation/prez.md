@@ -2150,13 +2150,203 @@ template: chapter-page
 ]
 
 Permet de verifier des petites portions de code de façon isolé.
-Les outils :
 
-- Jasmine, notre framework de test unitaire (BDD)
-- Karma, notre runner de test
-  - Multi-browser
-  - Multi-device
+.pull-left[
+#### Les outils
+
+- Jasmine, notre framework de test unitaire (BDD),
+- Karma, notre runner de test :
+  - Multi-browser,
+  - Multi-device,
+  - Automatisation,
+  - Des `repporters` pour Jenkins, Travis, etc...,
+  - Et des plugins pour la couverture de test !
+]
+
+.pull-right[
+#### Méthodes Jasmine
+
+- `describe()` déclare une suite de tests,
+- `it()` déclare un test,
+- `expect()` déclare une assertion et peut être chainé avec :
+   - `toBe()`, `toBeLessThan()`, `toBeUndefined()`, etc...
+   - Et leurs inverses avec `not.toBe()`, etc... 
+- `beforeEach()` pour initialiser un contexte,   
+- Par convention, un fichier de test => `.spec.ts`
+]
+
+???
+Une astuce : si tu utilises fdescribe() au lieu de describe() alors cette seule suite de tests sera exécutée (le "f" ajouté signifie "focus"). Même chose si tu ne veux exécuter qu’un seul test : utilise fit() au lieu de it(). Si tu veux exclure un test, utilise xit(), ou xdescribe() pour une suite de tests. 
   
+---
+
+.page-header[
+  # 05.2
+  ## Test unitaire - Exemple
+]
+
+Notre fichier de test `pony.spec.ts` :
+
+``` typescript
+describe('Pony', () => {
+  let pony: Pony;
+
+  beforeEach(() => {
+    pony = new Pony('Rainbow Dash', 10);
+  });
+
+  it('should have a name', () => {
+    expect(pony.name).toBe('Rainbow Dash');
+  });
+
+  it('should have a speed', () => {
+    expect(pony.speed).not.toBe(1);
+    expect(pony.speed).toBeGreaterThan(9);
+  });
+});
+
+```
+
+---
+
+.page-header[
+  # 05.2
+  ##  Test unitaire - Tester un service Angular
+]
+
+L'équipe d'Angular nous met à disposition des méthodes :
+ - `inject`,
+ - `addProviders` pour initialiser les dépendances,
+ - `async` pour gérer les appels asynchrone.
+
+``` typescript
+import { inject, addProviders } from '@angular/core/testing';
+
+describe('RaceService', () => {
+
+  beforeEach(() => addProviders([RaceService]));
+
+  it('should return a promise of 2 races', async(inject([RaceService], service => {
+      service.list().then(races => {
+        expect(races.length).toBe(2);
+      });
+  })));
+});
+```
+
+???
+Async utilise la notion de Zone d'Angular
+
+---
+
+.page-header[
+  # 05.3
+  ##  Test unitaire - Mocker une dépendance
+]
+
+
+On déclare un faux service :
+
+``` typescript
+class FakeLocalStorage {
+  get(key) {
+    return [{ name: 'Lyon' }, { name: 'London' }];
+  }
+}
+```
+
+Puis on mock le service via `addProviders` :
+
+``` typescript
+import { addProviders, inject } from '@angular/core/testing';
+
+describe('RaceService', () => {
+
+  beforeEach(() => addProviders([
+    { provide: LocalStorageService, useClass: FakeLocalStorage },
+    RaceService
+  ]));
+
+  it('should return 2 races from localStorage', inject([RaceService], service => {
+    let races = service.list();
+    expect(races.length).toBe(2);
+  }));
+});
+```
+
+
+---
+
+.page-header[
+  # 05.3
+  ##  Test unitaire - Tester un composant
+]
+
+#### Pour ce faire nous aurons besoin
+
+- D'instancier notre composant avec `TestComponentBuilder`,
+- De récupérer une représentation du composant `ComponentFixture`,
+- D'initialiser un contexte (Given),
+- De déclencher un changement d'état `fixture.detectChange()` (When),
+- Et de tester le resultat produit (Then).
+
+#### Notre composant 
+
+``` typescript
+@Component({
+  selector: 'ns-pony',
+  template: `<img [src]="'/images/pony-' + pony.color.toLowerCase() + '.png'" (click)="clickOnPony()">`
+})
+export class PonyComponent {
+
+  @Input() pony: PonyModel;
+  @Output() ponyClicked: EventEmitter<PonyModel> = new EventEmitter<PonyModel>();
+
+  clickOnPony() {
+    this.ponyClicked.emit(this.pony);
+  }
+
+}
+```
+
+---
+
+.page-header[
+  # 05.3
+  ##  Test unitaire - Tester un composant
+]
+
+#### Notre test
+
+``` typescript
+import { inject, async, TestComponentBuilder, ComponentFixture } from '@angular/core/testing';
+
+import { PonyComponent } from './pony_cmp';
+
+describe('PonyComponent', () => {
+    let tcb: TestComponentBuilder;
+    
+    beforeEach(inject([TestComponentBuilder], tcBuilder => tcb = tcBuilder));
+    
+    it('should have an image', async(() => {
+        tcb.createAsync(PonyComponent)
+          .then((fixture: ComponentFixture<PonyComponent>) => {
+            // given a component instance with a pony input initialized
+            let ponyComponent = fixture.componentInstance;
+            ponyComponent.pony = { name: 'Rainbow Dash', color: 'BLUE' };
+        
+            // when we trigger the change detection
+            fixture.detectChanges();
+        
+            // then we should have an image with the correct source attribute
+            // depending of the pony color
+            let element = fixture.nativeElement;
+            expect(element.querySelector('img').getAttribute('src')).toBe('/images/pony-blue.png');
+          });
+    }));
+});
+```
+
 ---
 
 .page-header[
