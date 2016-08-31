@@ -1516,19 +1516,48 @@ export class PonyRacerAppComponent {
 ```
 
 ---
+## Mon premier Module
+
+Ne pas confondre avec les modules ES6, ce sont des modules Angular
+
+Il y a toujours un module racine.
+
+`@NgModule` prends plusieurs paramètres:
+- `import`: importer d'autre modules Angular
+- `declarations`: déclarer les composants qui appartiennent à notre module
+- `bootstrap`: déclarer le composant racine (premier instancier)
+
+```typescript
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {PonyRacerAppComponent} from './ponyracer-app.component';
+
+@NgModule({
+    imports: [BrowserModule],
+    declarations:[PonyRacerAppComponent],
+    bootstrap:[PonyRacerAppComponent]
+})
+export class AppModule {
+
+}
+```
+
+???
+Nous reviendrons plus tard dessus avec une section dédier pour le reste des attributs
+
+---
 ## Bootsrap
 
-Il existe plusieurs façon de démarer angular en fonction de l'usage (server, web worker...)
+Il existe plusieurs façon de démarer angular en fonction de l'usage (server, web worker, browser...)
 - importer `@angular/platform-browser-dynamic`
-- Appel de la méthode bootstrap
+- Appel de la méthode bootstrap avec le module principale
 
 
 ```typescript
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { PonyRacerAppComponent } from './ponyracer-app.component';
+import {platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+import  {AppModule} from './app.module'
 
-bootstrap(PonyRacerAppComponent)
-  .catch(err => console.log(err)); // useful to catch the errors
+platformBrowserDynamic().bootstrapModule(AppModule).catch(e => console.log(e));
 ```
 
 
@@ -1539,6 +1568,10 @@ bootstrap(PonyRacerAppComponent)
   </ponyracer-app>
 </body>
 ```
+
+???
+Cette n'est pas dans le core car il existe plusieurs façon de démarrer Angular.
+
 
 ---
 ## Et les scripts?
@@ -1950,7 +1983,7 @@ donnera:
 
 ---
 
-## Pipe
+## Pipes
 
 Dans le code:
 

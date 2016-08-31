@@ -3,7 +3,7 @@
  */
 
 import {Component} from '@angular/core';
-import {RaceService} from "../services/race.service";
+// import {RaceService} from "../services/race.service";
 
 
 interface Race {
@@ -21,7 +21,7 @@ interface Race {
 </ul>
 `,
     // providers: [{provide: RaceService, useClass: RaceService}]
-    providers: [RaceService]
+    // providers: [RaceService]
 })
 export class RacesComponent {
 
@@ -29,14 +29,14 @@ export class RacesComponent {
     races:Array<Race> = [];
 
     refreshRaces():void {
-        // this.races = [{name: 'Londre'}, {name: 'Paris'}]
-        this.racesService.list();
+        this.races = [{name: 'Londre'}, {name: 'Paris'}];
+        // this.racesService.list();
     }
 
-    constructor(private racesService:RaceService) {
-        // console.log(newRaceAvailble);
-
-
-    }
+    // constructor(private racesService:RaceService) {
+    //     console.log(newRaceAvailble);
+    //
+    //
+    // }
 
 }
