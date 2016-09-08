@@ -2257,12 +2257,14 @@ import { inject, addProviders } from '@angular/core/testing';
 
 describe('RaceService', () => {
 
-  beforeEach(() => addProviders([RaceService]));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [RaceService]
+  }));
 
   it('should return a promise of 2 races', async(inject([RaceService], service => {
-      service.list().then(races => {
-        expect(races.length).toBe(2);
-      });
+    service.list().then(races => {
+      expect(races.length).toBe(2);
+    });
   })));
 });
 ```
@@ -2295,10 +2297,12 @@ import { addProviders, inject } from '@angular/core/testing';
 
 describe('RaceService', () => {
 
-  beforeEach(() => addProviders([
-    { provide: LocalStorageService, useClass: FakeLocalStorage },
-    RaceService
-  ]));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [
+      { provide: LocalStorageService, useClass: FakeLocalStorage },
+      RaceService
+    ]
+  }));
 
   it('should return 2 races from localStorage', inject([RaceService], service => {
     let races = service.list();
@@ -2352,31 +2356,35 @@ export class PonyComponent {
 #### Notre test
 
 ``` typescript
-import { inject, async, TestComponentBuilder, ComponentFixture } from '@angular/core/testing';
+describe('RaceComponent', () => {
+  let fixture: ComponentFixture<RaceComponent>;
 
-import { PonyComponent } from './pony_cmp';
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [RaceComponent, PonyComponent]
+    });
+    fixture = TestBed.createComponent(RaceComponent);
+  });
 
-describe('PonyComponent', () => {
-    let tcb: TestComponentBuilder;
-    
-    beforeEach(inject([TestComponentBuilder], tcBuilder => tcb = tcBuilder));
-    
-    it('should have an image', async(() => {
-        tcb.createAsync(PonyComponent)
-          .then((fixture: ComponentFixture<PonyComponent>) => {
-            // given a component instance with a pony input initialized
-            let ponyComponent = fixture.componentInstance;
-            ponyComponent.pony = { name: 'Rainbow Dash', color: 'BLUE' };
-        
-            // when we trigger the change detection
-            fixture.detectChanges();
-        
-            // then we should have an image with the correct source attribute
-            // depending of the pony color
-            let element = fixture.nativeElement;
-            expect(element.querySelector('img').getAttribute('src')).toBe('/images/pony-blue.png');
-          });
-    }));
+  it('should have a name and a list of ponies', () => {
+    // given a component instance with a race input initialized
+    const raceComponent = fixture.componentInstance;
+    raceComponent.race = { name: 'London', ponies: [{ name: 'Rainbow Dash', color: 'BLUE' }] };
+
+    // when we trigger the change detection
+    fixture.detectChanges();
+
+    // then we should have a name with the race name
+    const element = fixture.nativeElement;
+    expect(element.querySelector('h1').textContent).toBe('London');
+
+    // and a list of ponies
+    const ponies = fixture.debugElement.queryAll(By.directive(PonyComponent));
+    expect(ponies.length).toBe(1);
+    // we can check if the pony is correctly initialized
+    const rainbowDash = ponies[0].componentInstance.pony;
+    expect(rainbowDash.name).toBe('Rainbow Dash');
+  });
 });
 ```
 
