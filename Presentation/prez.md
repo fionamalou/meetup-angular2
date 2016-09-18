@@ -109,29 +109,29 @@ Implémentation progressive des navigateurs
   ## ES6 - Let
 ]
 
-L'instruction **let** est une variable. Elle evite le hoisting ("remontée"). Sa portée est limitée au bloc.
+L'instruction **let** est une variable. Elle évite le hoisting ("remontée"). Sa portée est limitée au bloc.
 
 .pull-left[
 #### ES5
 ``` javascript
-function getPonyFullName(pony) {
-  if (pony.isChampion) {
-    var name = 'Champion ' + pony.name;
+function getFullName(player) {
+  if (player.isWinner) {
+    var name = 'Winner ' + player.name;
     return name;
   }
-  return pony.name;
+  return player.name;
 }
 
 // Or
 
-function getPonyFullName(pony) {
+function getFullName(user) {
   var name;
-  if (pony.isChampion) {
-    name = 'Champion ' + pony.name;
+  if (player.isWinner) {
+    name = 'Winner ' + player.name;
     return name;
   }
   // name is still accessible here
-  return pony.name;
+  return player.name;
 }
 ```
 
@@ -141,13 +141,13 @@ function getPonyFullName(pony) {
 #### ES6
 
 ``` javascript
-function getPonyFullName(pony) {
-  if (pony.isChampion) {
-    let name = 'Champion ' + pony.name;
+function getFullName(player) {
+  if (player.isWinner) {
+    let name = 'Winner ' + player.name;
     return name;
   }
   // name is not accessible here
-  return pony.name;
+  return player.name;
 }
 ```
 
@@ -171,20 +171,20 @@ L'instruction **const** :
 - uniquement en get
 
 ``` javascript
-const PONIES_IN_RACE = 6;
-PONIES_IN_RACE = 7; // SyntaxError
+const NB_PLAYERS_MAX = 6;
+NB_PLAYERS_MAX = 7; // SyntaxError
 ```
 - Update attribut de l'objet ou tableau
 
 ``` javascript
 //Objet
-const PONY = {};
-PONY.color = 'blue'; // works
-PONY = {color: 'blue'}; // SyntaxError
+const PLAYER = {};
+PLAYER.color = 'blue'; // works
+PLAYER = {color: 'blue'}; // SyntaxError
 //Array
-const PONIES = [];
-PONIES.push({ color: 'blue' }); // works
-PONIES = []; // SyntaxError
+const PLAYERS = [];
+PLAYERS.push({ color: 'blue' }); // works
+PLAYERS = []; // SyntaxError
 ```
 
 ---
@@ -203,8 +203,8 @@ Ce nouveau raccourci permet de créer des objets :
 
 #### ES5
 ``` javascript
-function createPony() {
-  let name = 'Rainbow Dash';
+function createPlayer() {
+  let name = 'John';
   let color = 'blue';
   return { name: name, color: color };//ES5
 }
@@ -212,7 +212,7 @@ function createPony() {
 #### ES6
 ``` javascript
 function createPony() {
-  let name = 'Rainbow Dash';
+  let name = 'John';
   let color = 'blue';
   return { name, color };//ES6
 }
@@ -278,16 +278,16 @@ let [shortTimeout, mediumTimeout] = timeouts;
 #### Dans la vrai vie
 
 ``` javascript
-function randomPonyInRace() {
-  let pony = { name: 'Rainbow Dash' };
-  let position = 2;
+function randomPlayerOrder() {
+  let player = { name: 'John' };
+  let order = 2;
   // ...
-  return { pony, position };
+  return { player, order };
 }
 
-let { position, pony } = randomPonyInRace();
+let { order, player } = randomPlayerOrder();
 
-let { pony } = randomPonyInRace();
+let { player } = randomPlayerOrder();
 ```
 ]
 
@@ -310,7 +310,7 @@ class: thin-margin-page-header
 .right-column[
 #### ES5
 ``` javascript
-function getPonies(size, page) {
+function getPlayes(size, page) {
   size = size || 10; 
   //si l’opérande de gauche est falsy, 
   //c’est-à-dire undefined, 0, false, "",
@@ -322,14 +322,14 @@ function getPonies(size, page) {
 
 #### ES6
 ``` javascript
-function getPonies(size = 10, page = 1) {
+function getPlayers(size = 10, page = 1) {
   // ...
   server.get(size, page);
 }
-function getPonies(size = defaultSize(), page = 1) {
+function getPlayers(size = defaultSize(), page = 1) {
   //Can call a function
 }
-function getPonies(size = defaultSize(), page = size - 1) {
+function getPlayers(size = defaultSize(), page = size - 1) {
   //Can use previous parameters
 }
 ```
@@ -373,22 +373,22 @@ Permet d'utiliser la liste des argusments **proprement**.
 .pull-left[
 #### ES5
 ``` javascript
-function addPonies(ponies) {
+function addPlayers(players) {
   for (var i = 0; i < arguments.length; i++) {
-    poniesInRace.push(arguments[i]);
+    playesInGame.push(arguments[i]);
   }
 }
 
-addPonies('Rainbow Dash', 'Pinkie Pie');
+addPlayers('John', 'Rosa');
 ```
 ]
 --
 .pull-right[
 #### ES6
 ``` javascript
-function addPonies(...ponies) {
-  for (let pony of ponies) {
-    poniesInRace.push(pony);
+function addPlayers(...players) {
+  for (let player of players) {
+    playersInGame.push(player);
   }
 }
 ```
@@ -399,7 +399,7 @@ function addPonies(...ponies) {
 
 ???
 ES5: 
- Le paramètre ponies n’est jamais utilisé, et rien n’indique que l’on peut fournir plusieurs poneys.
+ Le paramètre players n’est jamais utilisé, et rien n’indique que l’on peut fournir plusieurs poneys.
 
 ES6:
  for …​ of utilisée pour l’itération est aussi une nouveauté d’ES6. Elle permet d’être sûr de n’itérer que sur les valeurs de la collection, et non pas sur ses propriétés comme for …​ in
@@ -416,21 +416,21 @@ ES6:
 
 .right-column[
 ``` javascript
-class Pony {
+class Player {
   constructor(color) {
     this.color = color;
   }
 
   toString() {
-    return `${this.color} pony`;
+    return `${this.color} player`;
     // see that? It is another cool feature of ES6,
     // called template literals
     // we'll talk about these quickly!
   }
 }
 
-let bluePony = new Pony('blue');
-console.log(bluePony.toString()); // blue pony
+let bluePlayer = new Player('blue');
+console.log(bluePlayer.toString()); // blue player
 ```
 ]
 
@@ -450,9 +450,9 @@ Les littéraux de gabarits de caractères sont délimités par des accents grave
 
 .right-column[
 ``` javascript
-class Pony {
-  static defaultSpeed() {
-    return 10;
+class Player {
+  static defaultMoney() {
+    return 1000;
   }
 
   get color() {
@@ -466,11 +466,11 @@ class Pony {
   }
 }
 //...
-let speed = Pony.defaultSpeed();//Use static
+let playerMoney = Player.defaultMoney();//Use static
 
-let pony = new Pony();
-pony.color = 'red';// 'set color red'
-console.log(pony.color);
+let player = new Player();
+player.color = 'red';// 'set color red'
+console.log(player.color);
 ```
 ]
 
@@ -489,25 +489,25 @@ console.log(pony.color);
 
 .right-column[
 ``` javascript
-class Animal {
-  constructor(speed) {
-    this.speed = speed;
+class Case {
+  constructor(name) {
+    this.name = name;
   }
 
   doSomethink(){
   	//move, stop...
   }
 }
-class Pony extends Animal {
-  constructor(speed, color) {
-    super(speed);
-    this.color = color;
+class CaseProperty extends case {
+  constructor(name, price) {
+    super(name);
+    this.price = price;
   }
   doSomethink(){
   	//Override function
   }
 }
-let pony = new Pony(20, 'blue');
+let pony = new CaseProperty('Rue de la paix', 400);
 console.log(pony.speed); // 20
 ```
 - Héritage ~~prototypal~~
@@ -674,21 +674,22 @@ le this reste le this de la function parent
 --
 
 .pull-right[
-Dans `races_service.js`
+Dans `game_service.js`
 ``` javascript
-export function bet(race, pony) {
+const players = [];
+export function addPlayer(player) {
   // ...
 }
-export function start(race) {
+export function start() {
   // ...
 }
 ```
 Dans `otherFile.js`
 ``` javascript
-import { bet, start } from './races_service';
+import { addPlayer, start } from './game_service';
 // later
-bet(race, pony1);
-start(race);
+addPlayer(new Player('John'));
+start();
 ```
 ]
 
@@ -712,10 +713,10 @@ API AMD (Asynchronous Module Definition)
 - Joker `*` : importe tout !
 
 ``` javascript
-import * as racesService from './races_service';
+import * as gameService from './game_service';
 //later
-racesService.bet(race, pony1);
-racesService.start(race);
+gameService.addPlayer(new Player('John'));
+gameService.start();
 ```
 ]
 
@@ -726,11 +727,11 @@ racesService.start(race);
 - Exporter un seul élément (function, valeur ou classe) : `default`
 
 ``` javascript
-// pony.js
-export default class Pony {
+// player.js
+export default class Player {
 }
-// races_service.js
-import Pony from './pony';
+// other_file.js
+import Player from './player';
 ```
 ]
 
@@ -986,8 +987,8 @@ let result3 = buildName("Bob", "Adams", "Sr.");
 .pull-left[
 #### Exemple JavaScript
 ``` javascript
-function startRunning(pony) {
-  pony.run(10);
+function startGame(player) {
+  player.setCurrentOrder(2);
 }
 ```
 ]
@@ -1015,18 +1016,17 @@ Run(distance) écrit juste la distance parcourue dans la console.
 .clearfix[
 #### Solution
 ``` typescript
-interface CanRun {
-  run(meters: number): void;
+interface ICase {
+  setName(name: string);
 }
-function startRunning(pony: CanRun): void {
-  pony.run(10);
+function starGame(case: ICase): void {
+  case.setName('Rue de la paix');
 }
 
-let pony = {
-  run: (meters) => logger.log(`pony runs ${meters}m`)
+let case = {
+  setName: (name) => logger.log(`Name case ${name}`)
 };
-startRunning(pony);
-
+startGame(case);
 ```
 ]
 
@@ -1047,14 +1047,15 @@ startRunning(pony);
 - Une **interface** peut étendre une ou plusieurs interfaces.
 
 ``` typescript
-interface Animal extends CanRun, CanEat {}
+interface ICaseProperty extends ICase, ICasePrice {}
 
-class Pony implements Animal {
-  run(meters) {
-    logger.log(`pony runs ${meters}m`);
+class CaseProperty implements ICaseProperty {
+  setName(name) {
+    logger.log(`Name case ${name}`);
   }
-  eat(){
-  	logger.log(`pony eats`);
+  hasPrice() {
+    logger.log(`This case has a price`);
+    return true;
   }
 }
 ```
@@ -1079,17 +1080,17 @@ class Pony implements Animal {
 #### Définition sur l'attribut
 
 ``` typescript
-class NamedPonyWithoutShortcut {
+class PlayerWithoutShortcut {
   public name: string;
-  private speed: number;
+  private money: number;
 
-  constructor(name: string, speed: number) {
+  constructor(name: string, money: number) {
     this.name = name;
-    this.speed = speed;
+    this.money = money;
   }
 
-  run() {
-    logger.log(`pony runs at ${this.speed}m/s`);
+  getMoney() {
+    logger.log(`player has ${this.money} €`);
   }
 }
 ```
@@ -1120,12 +1121,12 @@ class NamedPonyWithoutShortcut {
 L'instruction `private` peut être définie dans le constructeur :
 
 ``` typescript
-class NamedPony {
-  constructor(public name: string, private speed: number) {
+class NamedPlayer {
+  constructor(public name: string, private money: number) {
   }
 
-  run() {
-    logger.log(`pony runs at ${this.speed}m/s`);
+  getMoney() {
+    logger.log(`player has ${this.money} €`);
   }
 }
 ```
@@ -1268,35 +1269,37 @@ essayer TypeScript sinon repasser à ES6 avec Babel ou Traceur, ou même ES5 si 
 ]
 
 .right-column[
-#### Déclaration d'un décorateur custom
 ``` typescript
-function Log(target:Function, key:string, descriptor:any) {
+function Log(target:Function, methodName:string, descriptor:any) {
     return {
-        value: (...args:any[]) => {
-            console.log(`Call: ${key}`, descriptor);
-            var result = descriptor.value(...args);
+        value: (...args: any[]) => {
+            
+            const argsStr: string = args.join(',')
+            console.log(`Call: ${methodName}(${argsStr})`);
+            const result = descriptor.value(...args);
+            
+            if(result){
+                console.log(`Return (${key}): `, result);
+            }
+            
             return result;
         }
     };
 }
-
-class RaceService {
+class GameService {
+    private players: IPlayer[] = [];
+    
     @Log
-    getRaces() {
+    getPlayers() {
         // call API
-        console.log("do getRaces");
-    }
-    @Log
-    getRace(raceId) {
-        // call API
-        console.log("do getRace whit id: ", raceId);
+        console.log("do getPlayers");
+        return this.players;
     }
 }
-let raceService = new RaceService();
-raceService.getRace(123);
+let gameService = new GameService();
+gameService.getPlayers();
 ```
 ]
-
 
 ???
 tsc.cmd main.ts --experimentalDecorators
@@ -1334,69 +1337,92 @@ template: chapter-page
 
 ---
 
-## Philosophie 
+.page-header[
+  # 04.1
+  ## Philosophie
+]
 
-- orienté composants *(Angular1: controller + tempalte, directive )*
-- web moderne: ES6 mais ES5 aussi
-- Utilisation des décorateurs (Typescript, Traceur et Babel)
-- injection de dépendance
-- tests
+.pull-left[
+- Orienté composants : 
+   - *Angular 1.2 : controller + template, directive,*
+   - *Angular 1.5 : component*
+- Web moderne avec : 
+   - WebComponent,
+   - ES6 mais ES5 aussi !
+- Utilisation des décorateurs :
+   - TypeScript, 
+   - Traceur ou Babel,
+- Injection de dépendance,
+- Les tests,
 - Toujours magique mais fonctionne de manière différente (Zone)
+]
 
----
-## Aperçu
+.pull-right[
 
 ``` typescript
 import { Component } from '@angular/core';
-import { PonyComponent } from './components';
-import { RacesService } from './services';
+import { PlayerComponent } from './components';
+import { GameService } from './services';
 
 @Component({
-  selector: 'ns-race',
-  templateUrl: 'race/race.html',
-  directives: [PonyComponent]
+  selector: 'mn-game',
+  template: ``,
+  directives: [PlayerComponent]
 })
-export class RaceComponent {
+export class GameComponent {
 
-  race: any;
+  game: any;
 
-  constructor(racesService: RacesService) {
-    racesService.get()
-      .then(race => this.race = race);
+  constructor(gameService: GameService) {
+    gameService
+        .get()
+        .then(game => this.game = game);
   }
 }
 ```
 
 ```html
 <div>
-  <h2>{{ race.name }}</h2>
-  <div>{{ race.status }}</div>
-  <div *ngFor="let pony of race.ponies">
-    <ns-pony [pony]="pony"></ns-pony>
+  <h2>Game</h2>
+  <div>Nb players : {{ game.players.length }}</div>
+  <div *ngFor="let player of game.players">
+    <nn-player [player]="playe"></nn-player>
   </div>
 </div>
 ```
-
-???
-
-ne pas aller trop loin pour le moment, juste donner un aperçu du code
+]
 
 ---
+.page-header[
+  # 04.2
+  ## Création de notre projet Angular 2
+]
 
-## Le commencement
+.left-column[
 
-Avoir Node.js (>4.2) et NPM (>3)
+   ### Pré-requis
+    
+]
 
-Installer typescript et typings de manière globale
+.right-column[
+
+#### Pré-requis
+
+- Avoir Node.js v4.2+ et NPM v3+
+- Installer Typescript v1.5+ et Typings de manière globale
+- Ou Typescript v2 !!
+
 ```bash
 npm install -g typescript typings
 ```
 
-Init un projet tsc (**T**ype**S**cript **C**ompiler)
+- Initialiser un projet tsc (**T**ype**S**cript **C**ompiler)
+
 ```bash
 tsc --init --target es5 --sourceMap --experimentalDecorators --emitDecoratorMetadata
 ```
 
+]
 
 ???
 
@@ -1407,9 +1433,23 @@ It turns out C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\; was in my wi
 
 https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
----
+Depuis la version 2 de TypeScript, typings n'est plus nécessaire. Les fichiers .d.ts peuvent directement être installés via NPM.
 
-## tsconfig.json
+---
+.page-header[
+  # 04.2
+  ## Création de notre projet Angular 2
+]
+
+.left-column[
+
+   ### Pré-requis
+   ### TSConfig
+    
+]
+
+.right-column[
+#### Déclaration du tsconfig.json
 ```json
 {
   "compilerOptions": {
@@ -1426,39 +1466,55 @@ https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 }
 ```
 
-Compilation à la sauvegarde
+**Bonus :** Compilation à la sauvegarde
 
 ```bash
 tsc --watch
 ```
-
+]
 
 ---
-## Installation d'Angular
+.page-header[
+  # 04.2
+  ## Création de notre projet Angular 2
+]
+
+.left-column[
+
+   ### Pré-requis
+   ### TSConfig
+   ### Installation
+    
+]
+
+.right-column[
+#### Installation d'Angular
 
 ```bash
 npm init
 
-npm install --save @angular/core @angular/compiler @angular/common @angular/platform-browser @angular/platform-browser-dynamic rxjs@5.0.0-beta.6 reflect-metadata zone.js
+npm install --save @angular/core @angular/compiler @angular/common @angular/platform-browser @angular/platform-browser-dynamic rxjs@5.0.0-beta.12 reflect-metadata zone.js
 ```
 
-package.json
+#### Notre package.json
 ```json
 {
   "name": "angular2",
   "dependencies": {
-    "@angular/common": "^2.0.0-rc.5",
-    "@angular/compiler": "^2.0.0-rc.5",
-    "@angular/core": "^2.0.0-rc.5",
-    "@angular/platform-browser": "^2.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.5",
-    "reflect-metadata": "^0.1.8",
-    "rxjs": "^5.0.0-beta.6",
-    "zone.js": "^0.6.12"
+        "@angular/common": "2.0.0",
+        "@angular/compiler": "2.0.0",
+        "@angular/core": "2.0.0",
+        "@angular/platform-browser": "2.0.0",
+        "@angular/platform-browser-dynamic": "2.0.0",
+        "core-js": "^2.4.1",
+        "reflect-metadata": "^0.1.3",
+        "rxjs": "5.0.0-beta.12",
+        "zone.js": "^0.6.23",
   }
   ...
 }
 ```
+]
 ???
 les différents packages @angular.
 
@@ -1469,14 +1525,28 @@ rxjs, une bibliothèque vraiment cool appelée RxJS pour la programmation réact
 zone.js, qui assure la plomberie pour faire tourner notre code dans des zones isolées et y détecter les changements (on y reviendra aussi plus tard).
 
 ---
-## Installation d'Angular
+.page-header[
+  # 04.2
+  ## Création de notre projet Angular 2
+]
 
+.left-column[
+
+   ### Pré-requis
+   ### TSConfig
+   ### Installation
+   ### Typings
+    
+]
+
+.right-column[
+#### Création du projet typings
 ```bash
 typings init
 typings install --save --global dt~core-js
 ```
 
-Et ajoute les typings dans la section `exclude` du fichier `tsconfig.json` :
+#### Configuration du `tsconfig.json`
 ```json
 "exclude": [
   "node_modules",
@@ -1484,33 +1554,48 @@ Et ajoute les typings dans la section `exclude` du fichier `tsconfig.json` :
   "typings/global"
 ]
 ```
+]
 ???
-
-
----
-
-background-image: url(images/equipement.gif)
-
-L’outillage est désormais en place, il est temps de créer notre premier composant !
+On doit exclure les fichiers en doublons installé par typings pour l'environnement global. Dans le cas contraire, la compilation levera une erreur de type Duplicate declaration.
 
 ---
 
-## Mon premier composant
+template: end-chapter
+
+.end-chapter-container[
+
+.end-chapter-body[
+
+# Ready !
+Il est temps de créer notre premier composant !
+
+.center[
+![Ready?](images/equipement.gif)
+]
+
+]
+]
+
+---
+.page-header[
+  # 04.3
+  ## Notre premier composant
+]
 
 - @Component()
-- définir le selecteur
-- importer le core d'angular
+- Définir le selecteur
+- Importer le core d'Angular
 
->Bonne pratique: préfixer les selecteurs, suffixer le nom des fichier par type.
+> Bonne pratique: préfixer les selecteurs, suffixer le nom des fichier par type.
 
 ```typescript
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ponyracer-app',
-  template: '<h1>PonyRacer</h1>'
+  selector: 'mn-app',
+  template: '<h1>My First Angular 2 App</h1>'
 })
-export class PonyRacerAppComponent {
+export class AppComponent {
 
 }
 ```
@@ -1530,12 +1615,12 @@ Il y a toujours un module racine.
 ```typescript
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {PonyRacerAppComponent} from './ponyracer-app.component';
+import {AppComponent} from './app.component';
 
 @NgModule({
     imports: [BrowserModule],
-    declarations:[PonyRacerAppComponent],
-    bootstrap:[PonyRacerAppComponent]
+    declarations:[AppComponent],
+    bootstrap:[AppComponent]
 })
 export class AppModule {
 
@@ -1563,9 +1648,9 @@ platformBrowserDynamic().bootstrapModule(AppModule).catch(e => console.log(e));
 
 ```html
 <body>
-  <ponyracer-app>
+  <mn-app>
     You will see me while Angular starts the app!
-  </ponyracer-app>
+  </mn-app>
 </body>
 ```
 
@@ -1661,14 +1746,14 @@ Levé d'une erreur si la propriété n'est pas accéssible.
 
 ```typescript
 @Component({
-  selector: 'ponyracer-app',
+  selector: 'mn-app',
   // typo: users is not user!
   template: `
-    <h1>PonyRacer</h1>
+    <h1>Application</h1>
     <h2>Welcome {{users.name}}</h2>
   `
 })
-export class PonyRacerAppComponent {
+export class AppComponent {
 
   user: any = { name: 'Cédric' };
 
@@ -1691,11 +1776,11 @@ Et si ma prorpiété est asynchrone ?
   selector: 'ponyracer-app',
   // typo: users is not user!
   template: `
-    <h1>PonyRacer</h1>
+    <h1>Application</h1>
      <h2>Welcome {{user?.name}}</h2>
   `
 })
-export class PonyRacerAppComponent {
+export class AppComponent {
 
   user: any;
 
@@ -1731,9 +1816,9 @@ export class PonyRacerAppComponent {
 la fin des ng-if, ng-src, ng-show, ng-hide, ng-qqc
 ```html
 <div [hidden]="isHidden">Hidden or not</div>
-<option [selected]="isPonySelected" value="Rainbow Dash">Rainbow Dash</option>
+<option [selected]="isPonySelected" value="John">John</option>
 <p [style.color]="foreground">Friendship is Magic</p>
-<ns-pony name="Rainbow Dash"></ns-pony> //non dynamique
+<ns-pony name="John"></ns-pony> //non dynamique
 <ns-pony name="{{pony.fullName()}}"></ns-pony>
 <ns-pony [name]="pony.fullName()"></ns-pony>
 ```
@@ -1817,7 +1902,7 @@ permet d’instancier un template par élément d’une collection.
   <li *ngFor="let race of races">{{race.name}}</li>
 </ul>
 ```
-ajouter even, odd, first, last, index `*ngFor="let pony of ponies; let isEven = even"`
+ajouter even, odd, first, last, index `*ngFor="let pony of players; let isEven = even"`
 
 --
 
@@ -1843,7 +1928,7 @@ even, un booléen qui sera vrai si l’élément a un index pair
 odd, un booléen qui sera vrai si l’élément a un index impair
 first, un booléen qui sera vrai si l’élément est le premier de la collection
 last, un booléen qui sera vrai si l’élément est le dernier de la collection
-`*ngFor="let pony of ponies; let isEven = even"`
+`*ngFor="let pony of players; let isEven = even"`
 
 ---
 ## Templates
@@ -1923,20 +2008,20 @@ Je veux écrire un composant PoniesComponent, affichant une liste de poneys. Pou
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ns-ponies',
+  selector: 'ns-players',
   template: `<ul>
     <button (click)="refreshPonies()">Refresh</button>
-    <li *ngFor="let pony of ponies; let isEven=even"
+    <li *ngFor="let pony of players; let isEven=even"
       [style.color]="isEven ? 'green' : 'black'">
       {{pony.name}}
     </li>
   </ul>`
 })
 export class PoniesComponent {
-  ponies: Array<any> = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+  players: Array<any> = [{ name: 'John' }, { name: 'Rosa' }];
 
   refreshPonies() {
-    this.ponies = [{ name: 'Fluttershy' }, { name: 'Rarity' }];
+    this.players = [{ name: 'Fluttershy' }, { name: 'Rarity' }];
   }
 }
 ```
@@ -1974,11 +2059,11 @@ la configuration est simplifiée, en permutant facilement différentes implémen
 equivalent des filtres dans Angular 1
 
 ```html
-<p>{{ ponies | slice:0:2 | json }}</p>
+<p>{{ players | slice:0:2 | json }}</p>
 ```
 donnera:
 ```html
-<p>[ { "name": "Rainbow Dash" }, { "name": "Pinkie Pie" } ]</p>
+<p>[ { "name": "John" }, { "name": "Rosa" } ]</p>
 ```
 
 ---
@@ -1993,18 +2078,18 @@ import { Component } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 
 @Component({
-  selector: 'ns-ponies',
-  template: `<p>{{poniesAsJson}}</p>`
+  selector: 'ns-players',
+  template: `<p>{{playersAsJson}}</p>`
 })
 export class PoniesComponent {
-  ponies: Array<any> = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+  players: Array<any> = [{ name: 'John' }, { name: 'Rosa' }];
 
-  poniesAsJson: string;
+  playersAsJson: string;
 
   // inject the Pipe you want
   constructor(jsonPipe: JsonPipe) {
     // and then call the transform method on it
-    this.poniesAsJson = jsonPipe.transform(this.ponies);
+    this.playersAsJson = jsonPipe.transform(this.players);
   }
 }
 ```
@@ -2225,11 +2310,11 @@ describe('Pony', () => {
   let pony: Pony;
 
   beforeEach(() => {
-    pony = new Pony('Rainbow Dash', 10);
+    pony = new Pony('John', 10);
   });
 
   it('should have a name', () => {
-    expect(pony.name).toBe('Rainbow Dash');
+    expect(pony.name).toBe('John');
   });
 
   it('should have a speed', () => {
@@ -2334,7 +2419,7 @@ describe('RaceService', () => {
   selector: 'ns-pony',
   template: `<img [src]="'/images/pony-' + pony.color.toLowerCase() + '.png'" (click)="clickOnPony()">`
 })
-export class PonyComponent {
+export class PlayerComponent {
 
   @Input() pony: PonyModel;
   @Output() ponyClicked: EventEmitter<PonyModel> = new EventEmitter<PonyModel>();
@@ -2366,10 +2451,10 @@ describe('RaceComponent', () => {
     fixture = TestBed.createComponent(RaceComponent);
   });
 
-  it('should have a name and a list of ponies', () => {
+  it('should have a name and a list of players', () => {
     // given a component instance with a race input initialized
     const raceComponent = fixture.componentInstance;
-    raceComponent.race = { name: 'London', ponies: [{ name: 'Rainbow Dash', color: 'BLUE' }] };
+    raceComponent.race = { name: 'London', players: [{ name: 'John', color: 'BLUE' }] };
 
     // when we trigger the change detection
     fixture.detectChanges();
@@ -2378,12 +2463,12 @@ describe('RaceComponent', () => {
     const element = fixture.nativeElement;
     expect(element.querySelector('h1').textContent).toBe('London');
 
-    // and a list of ponies
-    const ponies = fixture.debugElement.queryAll(By.directive(PonyComponent));
-    expect(ponies.length).toBe(1);
+    // and a list of players
+    const players = fixture.debugElement.queryAll(By.directive(PonyComponent));
+    expect(players.length).toBe(1);
     // we can check if the pony is correctly initialized
-    const rainbowDash = ponies[0].componentInstance.pony;
-    expect(rainbowDash.name).toBe('Rainbow Dash');
+    const rainbowDash = players[0].componentInstance.pony;
+    expect(rainbowDash.name).toBe('John');
   });
 });
 ```
