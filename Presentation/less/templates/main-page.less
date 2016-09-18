@@ -1,0 +1,70 @@
+.main-page {
+
+  .remark-slide-number{
+    display: none;
+  }
+
+  &.remark-slide-content{
+    background-image: none;
+  }
+
+  h2 {
+    font-size:20px;
+    font-weight: bold;
+    margin-left:-30px;
+  }
+
+  h2 + h1 {
+    font-family: @font-family;
+    font-weight: normal;
+    color:@blue;
+    font-size: 40pt;
+    //letter-spacing: -2px;
+    margin-top:30px;
+    margin-left:-30px;
+  }
+
+  .main-body {
+    position: relative;
+    height: 580px;
+    width: 100%;
+    top: 20px;
+    border: 1px solid grey;
+    padding:5px;
+    font-size:26pt;
+    line-height:60px;
+    font-weight: bold;
+    overflow: hidden;
+    margin-top:64px;
+    background-color: #EEEEEE;
+  }
+
+  .main-container {
+    position: relative;
+    .body-rotate();
+    p{}
+  }
+
+  /** Main logo **/
+
+  .main-logo{
+    position: absolute;
+    display: block;
+    .transform(rotate(29deg));
+    top: -10px;
+    left: -91px;
+    right: 0;
+    bottom: -87px;
+
+    background: url("../images/super-hero-large.png") no-repeat bottom center,linear-gradient(145deg,#0D47A1,#42A5F5);
+    margin:0;
+    padding:0;
+    img{
+      width: 350px;
+      position: absolute;
+      left:340px;
+      top:200px;
+    }
+  }
+
+}

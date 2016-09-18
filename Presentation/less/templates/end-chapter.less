@@ -1,0 +1,36 @@
+
+.end-chapter {
+  font-family: @font-family;
+
+  &.remark-slide-content{
+    background: @blue;
+  }
+
+  .remark-slide-number{
+    display: none;
+  }
+
+  .end-chapter-container {
+    .body-rotate();
+
+    height: 580px;
+    width: 100%;
+    background-color: #98e9fd;
+    padding:5px;
+    font-size:26pt;
+    line-height:60px;
+    font-weight: bold;
+    top:100px;
+    left: 20px;
+  }
+
+  .end-chapter-body {
+    .transform(rotate(29deg) translate(-140px, 80px));
+    width: 80%;
+    color:white;
+
+    h1 {
+      letter-spacing: -5px;
+    }
+  }
+}

@@ -8,8 +8,7 @@ class: main-page
 
 .main-container[
 .main-body[
-  ![Google logo](images/angular2.jpg "Angular 2")
-]
+.main-logo[![Google logo](images/angular.svg "Angular 2")]]
 ]
 
 ---
@@ -151,7 +150,7 @@ function getFullName(player) {
 }
 ```
 
-Remplacera définitivement **var** à long terme !
+>.center[Remplacera définitivement **var** à long terme !]
 ]
 
 ???
@@ -217,7 +216,7 @@ function createPony() {
   return { name, color };//ES6
 }
 ```
-.center[Ici la propriété de l’objet = nom de la variable !]
+>.center[Ici la propriété de l’objet = nom de la variable !]
 ]
 
 
@@ -394,8 +393,15 @@ function addPlayers(...players) {
 ```
 ]
 
-.center[*Ne pas confonfondre avec spread operator ("opérateur d’étalement")*]
-.center[`let minPrice = Math.min(...[12,3,5]);`]
+<div class="clearfix" style="padding-top: 30px">
+<blockquote>
+.center[
+ *Ne pas confondre avec spread operator ("opérateur d’étalement")*
+ <br />
+ `let minPrice = Math.min(...[12,3,5]);`
+]
+</blockquote>
+</div>
 
 ???
 ES5: 
@@ -507,8 +513,8 @@ class CaseProperty extends case {
   	//Override function
   }
 }
-let pony = new CaseProperty('Rue de la paix', 400);
-console.log(pony.speed); // 20
+let case = new CaseProperty('Rue de la paix', 400);
+console.log(case.price); // 400
 ```
 - Héritage ~~prototypal~~
 - Héritage de classes
@@ -692,9 +698,10 @@ addPlayer(new Player('John'));
 start();
 ```
 ]
-
-.center[**Fondamentale dans Angular 2**]
-
+.clearfix[
+<br />
+>.center[Fondamentale dans Angular 2]
+]
 ???
 API AMD (Asynchronous Module Definition)
 
@@ -863,16 +870,17 @@ tsc.cmd test.ts
   ## TypeScript - Typage
 ]
 
-`let variable: type;`
+
 
 .pull-left[
+#### let variable: type;
 
 - **Basics** : boolean, number, string, array
 - **Autres** : any, Class, Enum ,Tuple, Void
 - **Mix** : number | boolean
 
 
-*Les **basics** peuvent être définit à l'initialisation !*
+>.center[Les **basics** peuvent être définit à l'initialisation !]
 
 ]
 
@@ -1095,7 +1103,7 @@ class PlayerWithoutShortcut {
 }
 ```
 
-*L'attribut `private` ne sera pas accessible depuis l'exterieur de la classe !*
+>.center[L'attribut `private` ne sera pas accessible depuis l'exterieur de la classe !]
 
 ]
 
@@ -1201,7 +1209,7 @@ angular.module(10, []); // the module name should be a string
 // Argument of type 'number' is not 
 //assignable to parameter of type 'string'.
 ```
-*Facultatif depuis TS 1.6 !*
+>.center[Facultatif depuis TS 1.6 !]
 ]
 
 ???
@@ -1221,7 +1229,6 @@ Exemple pour angular 1
 ]
 
 .right-column[
-#### Principes
 
 - Ajouter pour angular 2 *(AtScript)* à TypeScript,
 - Applicable à une class, attribut, fonction/méthode, paramètre,
@@ -1242,7 +1249,7 @@ class HomeComponent {
 }
 ```
 
->.center[*BabelJS supporte aussi les décorateurs Angular.*]
+>.center[BabelJS supporte aussi les décorateurs Angular.]
 
 ]
 
@@ -1268,7 +1275,7 @@ essayer TypeScript sinon repasser à ES6 avec Babel ou Traceur, ou même ES5 si 
     
 ]
 
-.right-column[
+.right-column.margin-top-15[
 ``` typescript
 function Log(target:Function, methodName:string, descriptor:any) {
     return {
@@ -1329,12 +1336,16 @@ Maintenant Angular 2. Ready ?
 ---
 template: chapter-page
 
-
 .chapter-container[
   # 04
   ## Angular 2
 ]
 
+---
+layout: false
+name: splited-page
+layout: true
+class: splited-page
 ---
 
 .page-header[
@@ -1393,6 +1404,8 @@ export class GameComponent {
 ]
 
 ---
+layout: false
+
 .page-header[
   # 04.2
   ## Création de notre projet Angular 2
@@ -1487,7 +1500,7 @@ tsc --watch
     
 ]
 
-.right-column[
+.right-column.margin-top-15[
 #### Installation d'Angular
 
 ```bash
@@ -1582,11 +1595,14 @@ Il est temps de créer notre premier composant !
   ## Notre premier composant
 ]
 
-- @Component()
+#### @Component()
+
 - Définir le selecteur
 - Importer le core d'Angular
 
-> Bonne pratique: préfixer les selecteurs, suffixer le nom des fichier par type.
+>.center[ Bonne pratique : préfixer les selecteurs, suffixer le nom des fichier par type.]
+
+<br />
 
 ```typescript
 import { Component } from '@angular/core';
@@ -1601,17 +1617,26 @@ export class AppComponent {
 ```
 
 ---
-## Mon premier Module
+template: splited-page
+
+.page-header[
+  # 04.4
+  ## Création du module principal
+]
+
+.pull-left[
+#### @NgModule
 
 Ne pas confondre avec les modules ES6, ce sont des modules Angular
 
 Il y a toujours un module racine.
 
-`@NgModule` prends plusieurs paramètres:
-- `import`: importer d'autre modules Angular
-- `declarations`: déclarer les composants qui appartiennent à notre module
+**@NgModule** prends plusieurs paramètres :
+- `import`: importer d'autre modules Angular,
+- `declarations`: déclarer les composants qui appartiennent à notre module,
 - `bootstrap`: déclarer le composant racine (premier instancier)
-
+]
+.pull-right.margin-top-p30[
 ```typescript
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -1626,18 +1651,22 @@ export class AppModule {
 
 }
 ```
-
+]
 ???
 Nous reviendrons plus tard dessus avec une section dédier pour le reste des attributs
 
 ---
-## Bootsrap
+.page-header[
+  # 04.5
+  ## Bootstrap
+]
 
 Il existe plusieurs façon de démarer angular en fonction de l'usage (server, web worker, browser...)
-- importer `@angular/platform-browser-dynamic`
-- Appel de la méthode bootstrap avec le module principale
 
+- Importer `@angular/platform-browser-dynamic`,
+- Appel de la méthode bootstrap avec le module principale.
 
+#### app.module.ts
 ```typescript
 import {platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import  {AppModule} from './app.module'
@@ -1645,7 +1674,7 @@ import  {AppModule} from './app.module'
 platformBrowserDynamic().bootstrapModule(AppModule).catch(e => console.log(e));
 ```
 
-
+#### index.html
 ```html
 <body>
   <mn-app>
@@ -1657,64 +1686,31 @@ platformBrowserDynamic().bootstrapModule(AppModule).catch(e => console.log(e));
 ???
 Cette n'est pas dans le core car il existe plusieurs façon de démarrer Angular.
 
-
 ---
-## Et les scripts?
+.page-header[
+  # 04.6
+  ## Gestion des scripts
+]
 
-- Plus complexe mais plus puissant
-- Exploitation des modules
-- Uniquement disponible à partir d'ES6
-- Utilisation d'un outil [SystemJs](https://github.com/systemjs/systemjs)
+>.center[Plus complexe mais plus puissant. Basé sur les loaders ES6, il y a plusieurs options d'outils !]
 
-```bash
-npm install -save systemjs
-```
+.pull-left[
+ 
+![SystemJS](images/systemjs.jpg)
+
+.center[**Recommandé par Angular**]
+]
+
+.pull-right[
+ 
+![Webpack](images/webpack.png)
+
+.center[**Le plus complet**]
+]
 
 ???
 
 SystemJS est un petit chargeur de modules : tu l’ajoutes (statiquement) dans ta page HTML, tu lui indiques où sont situés les modules sur le serveur, et tu charges l’un d’eux. Il déterminera automatiquement les dépendances entre les modules, et téléchargera ceux utilisés par ton application.
-
----
-## Et les scripts?
-
-```html
-<head>
-  <script src="node_modules/zone.js/dist/zone.js"></script>
-  <script src="node_modules/reflect-metadata/Reflect.js"></script>
-  <script src="node_modules/systemjs/dist/system.js"></script>
-  <script>
-    System.config({
-      // we want to import modules without writing .js at the end
-      defaultJSExtensions: true,
-      // the app will need the following dependencies
-      map: {
-        '@angular': 'node_modules/@angular',
-        'rxjs': 'node_modules/rxjs'
-      },
-      // angular needs a bit of configuration to point to the main files
-      packages: {
-        '@angular/core': {
-          main: 'index.js'
-        },
-        '@angular/compiler': {
-          main: 'index.js'
-        },
-        '@angular/common': {
-          main: 'index.js'
-        },
-        '@angular/platform-browser': {
-          main: 'index.js'
-        },
-        '@angular/platform-browser-dynamic': {
-          main: 'index.js'
-        }
-      }
-    });
-    // and to finish, let's boot the app!
-    System.import('bootstrap');
-  </script>
-</head>
-```
 
 ---
 
