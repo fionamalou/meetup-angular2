@@ -1713,32 +1713,56 @@ Cette n'est pas dans le core car il existe plusieurs façon de démarrer Angular
 SystemJS est un petit chargeur de modules : tu l’ajoutes (statiquement) dans ta page HTML, tu lui indiques où sont situés les modules sur le serveur, et tu charges l’un d’eux. Il déterminera automatiquement les dépendances entre les modules, et téléchargera ceux utilisés par ton application.
 
 ---
+.page-header[
+  # 04.6
+  ## Template
+]
 
-## Templates
+.left-column[
+
 ### Interpolation
+
+]
+
+.right-column.margin-top-50[
+
+#### Principes Angular 1
 
 `{{ 1+2 }} / {{ a+b }} / {{ user.name }} / {{ items[index] }}`
 
-Expressions Angular != expressions JavaScript
+Expressions Angular != Expressions JavaScript
  
-- **Context**: Les expressions Angular sont définies dans la class du component 
-- **Forgiving**: En javascript, les propriétés non définies renvoient des ReferenceError ou TypeError. Avec Angular, elles renvoient undefined ou null. 
-- **No Control Flow Statements**: Avec Angular, on ne peut pas utiliser les conditions, les boucles ou les exceptions dans les expressions.
-- **Filters**: Les filtres peuvent être utilisés pour formater les données à afficher.
+- **Context** : Les expressions Angular sont définies dans la class du component 
+- **Forgiving** : En javascript, les propriétés non définies renvoient des ReferenceError ou TypeError. Avec Angular, elles renvoient undefined ou null. 
+- **No Control Flow Statements** : Avec Angular, on ne peut pas utiliser les conditions, les boucles ou les exceptions dans les expressions.
+- **Filters** : Les filtres peuvent être utilisés pour formater les données à afficher.
 
 
-### Recommandations : 
+#### Recommandations
+
 Utiliser des expressions simples et seulement des expressions simples :
 - Data binding, 
-- appels à des fonctions, 
-- comparaison à des expressions booléennes.
+- Appels à des fonctions, 
+- Comparaison à des expressions booléennes.
+]
+
 
 ---
+.page-header[
+  # 04.6
+  ## Template
+]
 
-## Templates
+.left-column[
+
 ### Interpolation
-### Nouveauté: Safe Navigation Operator
-Levé d'une erreur si la propriété n'est pas accéssible.
+### Nouveauté SNO
+
+]
+
+.right-column[
+#### Nouveauté : Safe Navigation Operator
+Levé d'une erreur si la propriété n'est pas accessible.
 
 ```typescript
 @Component({
@@ -1756,16 +1780,28 @@ export class AppComponent {
 }
 ```
 
-`Cannot read property 'name' of undefined in [{{users.name}} in PonyRacerAppComponent]`
 
+> Cannot read property 'name' of undefined in [{{users.name}} in PonyRacerAppComponent]
+]
 ???
 users n'existe pas et rien ne l'indique.
 
 ---
-## Templates
+.page-header[
+  # 04.6
+  ## Template
+]
+
+.left-column[
+
 ### Interpolation
-### Nouveauté: Safe Navigation Operator
-Et si ma prorpiété est asynchrone ? 
+### Nouveauté SNO
+
+]
+
+.right-column[
+#### Nouveauté : Safe Navigation Operator
+Et si ma propriété est asynchrone ? 
 
 ```typescript
 @Component({
@@ -1782,6 +1818,8 @@ export class AppComponent {
 
 }
 ```
+>.center[L'opérateur `?` permet de désactiver l'erreur d'interpolation.]
+]
 
 ---
 ## Templates
