@@ -2,12 +2,12 @@
  * Created by nicolas.boe on 09/08/2016.
  */
 
-let isDone:boolean = false;
+let isDone: boolean = false;
 
 enum Color {Red, Green, Yellow}
 class User {
     name = "";
-    status:Color = Color.Red;
+    status: Color = Color.Red;
 }
 
 let users:Array<User> = [new User()];
@@ -16,7 +16,7 @@ let x:[string, number];
 x = ["hello", 10]; // OK
 
 
-let c:Color = Color.Green; // c = 0
+let c: Color = Color.Green; // c = 0
 
 
 function setAfk(user:User):User {
@@ -50,51 +50,66 @@ addPointsToScore(player);
 
 //----------------------------
 
-class NamedPonyWithoutShortcut {
-    public name:string;
-    private speed:number;
+class PlayerWithoutShortcut {
+    public name: string;
+    private money: number;
 
-    constructor(name:string, speed:number) {
+    constructor(name: string, money: number) {
         this.name = name;
-        this.speed = speed;
+        this.money = money;
     }
 
-    run() {
-        console.log(`pony runs at ${this.speed}m/s`);
+    getMoney() {
+        console.log(`player has ${this.money} €`);
     }
 }
 
-let privatePony = new NamedPonyWithoutShortcut('Rocket', 100);
-console.log(privatePony.name);
+let privatePlayer = new PlayerWithoutShortcut('John', 100);
+console.log(privatePlayer.name);
+
+class NamedPlayer {
+    constructor(public name: string, private money: number) {
+
+    }
+
+    getMoney() {
+        console.log(`player has ${this.money} €`);
+    }
+}
 
 
 //----------------------------
-
-function Log (target:any, key:string, descriptor:any) {
+function Log(target: any, methodName: string, descriptor: any) {
     return {
-        value: (...args:any[]) => {
-            console.log(`Call: ${key}`, descriptor);
-            var result = descriptor.value(...args);
+        value: (...args: any[]) => {
+
+            const argsStr: string = args.join(',')
+            console.log(`Call: ${methodName}(${argsStr})`);
+            const result = descriptor.value(...args);
+
+            if(result){
+                console.log(`Return (${methodName}): `, result);
+            }
+
             return result;
         }
     };
 }
 
-class RaceService {
+interface IPlayer{
+    name: string;
+}
+
+class GameService {
+    private players: IPlayer[] = [];
 
     @Log
-    getRaces() {
+    getPlayers() {
         // call API
-        console.log("do getRaces");
-    }
-
-    @Log
-    getRace(raceId) {
-        // call API
-        console.log("do getRace whit id: ", raceId);
+        console.log("do getPlayers");
+        return this.players;
     }
 }
 
-let raceService = new RaceService();
-
-raceService.getRace(123);
+let gameService = new GameService();
+gameService.getPlayers();

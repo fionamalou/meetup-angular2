@@ -1,6 +1,4 @@
-/**
- * Created by nicolas.boe on 08/08/2016.
- */
+
 //Add methode on console for right on page
 console.out = function (message) {
     document.getElementById('console').innerHTML += '\r\n' + message;
@@ -11,6 +9,7 @@ console.out = function (message) {
 //###################
 //       Let
 //###################
+
 let useVar = function (user) {
     console.clear();
     if (user.isConnect) {
@@ -133,7 +132,3 @@ let extendedParameter = function (x, y, ...a) {
 let tryExtendedParameter = function (x, y, ...a) {
     console.out(extendedParameter(1, 2, "hello", true, 7) === 9);
 };
-
-
-
-

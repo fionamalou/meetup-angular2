@@ -7,24 +7,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-let isDone = false;
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var isDone = false;
 var Color;
 (function (Color) {
     Color[Color["Red"] = 0] = "Red";
     Color[Color["Green"] = 1] = "Green";
     Color[Color["Yellow"] = 2] = "Yellow";
 })(Color || (Color = {}));
-class User {
-    constructor() {
+var User = (function () {
+    function User() {
         this.name = "";
         this.status = Color.Red;
     }
-}
-let users = [new User()];
+    return User;
+}());
+var users = [new User()];
 // Declare a tuple type
-let x;
+var x;
 x = ["hello", 10]; // OK
-let c = Color.Green; // c = 0
+var c = Color.Green; // c = 0
 function setAfk(user) {
     user.status = Color.Yellow;
     return user;
@@ -37,48 +41,67 @@ function addPointsToScore(player, points) {
     player.score += points;
     console.log(player);
 }
-let player = {
+var player = {
     score: 10
 };
 addPointsToScore(player);
 //----------------------------
-class NamedPonyWithoutShortcut {
-    constructor(name, speed) {
+var PlayerWithoutShortcut = (function () {
+    function PlayerWithoutShortcut(name, money) {
         this.name = name;
-        this.speed = speed;
+        this.money = money;
     }
-    run() {
-        console.log(`pony runs at ${this.speed}m/s`);
+    PlayerWithoutShortcut.prototype.getMoney = function () {
+        console.log("player has " + this.money + " \u20AC");
+    };
+    return PlayerWithoutShortcut;
+}());
+var privatePlayer = new PlayerWithoutShortcut('John', 100);
+console.log(privatePlayer.name);
+var NamedPlayer = (function () {
+    function NamedPlayer(name, money) {
+        this.name = name;
+        this.money = money;
     }
-}
-let privatePony = new NamedPonyWithoutShortcut('Rocket', 100);
-console.log(privatePony.name);
+    NamedPlayer.prototype.getMoney = function () {
+        console.log("player has " + this.money + " \u20AC");
+    };
+    return NamedPlayer;
+}());
 //----------------------------
-function Log(target, key, descriptor) {
-    console.log(target);
+function Log(target, methodName, descriptor) {
     return {
-        value: (...args) => {
-            console.log(`Call: ${key}`, descriptor);
-            var result = descriptor.value(...args);
+        value: function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i - 0] = arguments[_i];
+            }
+            var argsStr = args.join(',');
+            console.log("Call: " + methodName + "(" + argsStr + ")");
+            var result = descriptor.value.apply(descriptor, args);
+            if (result) {
+                console.log("Return (" + methodName + "): ", result);
+            }
             return result;
         }
     };
 }
-class RaceService {
-    getRaces() {
-        // call API
-        console.log("do getRaces");
+var GameService = (function () {
+    function GameService() {
+        this.players = [];
     }
-    getRace(raceId) {
+    GameService.prototype.getPlayers = function () {
         // call API
-        console.log("do getRace whit id: ", raceId);
-    }
-}
-__decorate([
-    Log
-], RaceService.prototype, "getRaces", null);
-__decorate([
-    Log
-], RaceService.prototype, "getRace", null);
-let raceService = new RaceService();
-raceService.getRace(123);
+        console.log("do getPlayers");
+        return this.players;
+    };
+    __decorate([
+        Log, 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], GameService.prototype, "getPlayers", null);
+    return GameService;
+}());
+var gameService = new GameService();
+gameService.getPlayers();

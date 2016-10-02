@@ -1,4 +1,7 @@
-# Angular2
+
+![Google logo](presentation/images/angular.svg "Angular 2")
+
+# Angular 2
 
 Formation Angular 2
 
@@ -14,7 +17,7 @@ vision de ce que devrait être un Framework web, l'approche composant !
 Tout cela articulé autour de JavaScript ES2015 et surtout du nouveau 
 langage développé par Microsoft : TypeScript.
 
-Tant de changements et de nouveautés que nous vous proposons débroussailler 
+Tant de changements et de nouveautés que nous vous proposons de débroussailler 
 ensemble autour de ce programme :
 
  * Pourquoi avoir fait le choix de TypeScript ?
@@ -27,13 +30,28 @@ ensemble autour de ce programme :
  * Outillage et industrialisation
 
 Durée : 3H
-Présentateurs : 
 
-* Nicolas Boe - Toulouse, 
-* Romain Lenzotti - Paris
+Présentation le : 4 octobre 2016
 
-# Usage
+# Démonstration
 
-Pressing C will open a cloned view of the current slideshow in a new browser window.
+Exemple de code ES6 et Typescript dans le dossier `demo`.
 
-Pressing P will toggle presenter mode.
+# Application Angular 2
+
+Vous pouvez récupérer le projet Monopoly relatif à cette présentation
+à cette adresse [https://github.com/romakita/ng2-monopoly](https://github.com/romakita/ng2-monopoly).
+
+# Commande de présentation (remarkjs)
+
+* Pressing C will open a cloned view of the current slideshow in a new browser window.
+* Pressing P will toggle presenter mode.
+
+# Contributeurs
+
+* Nicolas Boe, 
+* Romain Lenzotti
+
+# Licence
+
+Valtech Training
