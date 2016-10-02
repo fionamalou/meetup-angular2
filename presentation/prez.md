@@ -50,7 +50,18 @@ layout: false
 
 .page-header[
   # 01.1
-  ## Introduction
+  ## Le web
+]
+
+.center.margin-top-70[
+![WebHistory](images/webhistory.png "Web history")
+]
+---
+class: angular-react-bg
+
+.page-header[
+  # 01.2
+  ## Les frameworks
 ]
 
 .row[
@@ -63,19 +74,19 @@ layout: false
    - MVVM,
    - Des controleurs, directives, services, etc...
    - Two data-binding,
-   - Des tests unitaires !
+   - Les tests unitaires !
  ]
- 
- 
   
  .col-lg-4[
    #### ReactJS
    
    - Facebook - 2013
    - Le challenger !
-   - Mais seulement sur l'aspect Component.
+   - Mais seulement sur l'aspect Component,
    - DOM Shadow,
-   - Performance et réactif
+   - Performance et réactif,
+   - One way data-binding,
+   - Universal JavaScript.
  ]
  
  .col-lg-4[
@@ -87,17 +98,26 @@ layout: false
      - Web Components,
      - Mobile First.
    - La programmation Reactive...
+   - Angular Universal.
   ]
 
 ]
 
+>.center[http://tutorials.pluralsight.com/front-end-javascript/angular-vs-react-a-side-by-side-comparison]
+
 ---
-.center[
-![WebHistory](images/webhistory.png "Web history")
+
+.page-header[
+  # 01.3
+  ## Les Tendances - Google trend
 ]
 
----
+.center[
+![GoogleTrend](images/google-trend.png "Web history")
+]
 
+
+---
 template: chapter-page
 
 .chapter-container[
@@ -737,7 +757,7 @@ start();
 ```
 ]
 .clearfix[
-<br />
+
 >.center[Fondamentale dans Angular 2]
 ]
 ???
@@ -1033,8 +1053,8 @@ let result3 = buildName("Bob", "Adams", "Sr.");
 .pull-left[
 #### Exemple JavaScript
 ``` javascript
-function startGame(player) {
-  player.setCurrentOrder(2);
+function startGame(theCase) {
+  theCase.setName('Rue de la paix');
 }
 ```
 ]
@@ -1065,14 +1085,14 @@ Run(distance) écrit juste la distance parcourue dans la console.
 interface ICase {
   setName(name: string);
 }
-function starGame(case: ICase): void {
-  case.setName('Rue de la paix');
+function starGame(theCase: ICase): void {
+  theCase.setName('Rue de la paix');
 }
 
-let case = {
+let theCase = {
   setName: (name) => logger.log(`Name case ${name}`)
 };
-startGame(case);
+startGame(theCase);
 ```
 ]
 
