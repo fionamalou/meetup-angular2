@@ -224,7 +224,7 @@ sinon il y a un défaut dans le code
 
 L'instruction **const** :
 - Est une constante,
-- Porté du bloc comme let,
+- Portée du bloc comme let,
 - Uniquement en get,
 
 ``` javascript
@@ -253,7 +253,7 @@ PLAYERS = []; // SyntaxError
 ]
 
 .left-column[
-  ### 1er raccourci
+  ### 1<sup>er</sup> raccourci
 ]
 
 .right-column[
@@ -300,8 +300,8 @@ class: thin-margin-page-header
 ]
 
 .left-column[
-  ### 1er raccourci
-  ### 2e raccourci
+  ### 1<sup>er</sup> raccourci
+  ### 2<sup>e</sup> raccourci
 ]
 
 .right-column[
@@ -338,13 +338,13 @@ let [shortTimeout, mediumTimeout] = timeouts;
   ## ES6 - Affectations déstructurées
 ]
 .left-column[
-  ### 1er raccourci
-  ### 2e raccourci
+  ### 1<sup>er</sup> raccourci
+  ### 2<sup>e</sup> raccourci
   ### Conclusion
 ]
 
 .right-column[
-#### Dans la vrai vie
+#### Dans la vraie vie
 
 ``` javascript
 function randomPlayerOrder() {
@@ -416,7 +416,7 @@ Maintenant 0 ou "" sont des valeurs valides, et ne seront pas remplacées par le
 ]
 
 .right-column[
-Fonctionne aussi pour les objets :
+Fonctionnent aussi pour les objets :
 ``` javascript
 let { timeout = 1000 } = httpOptions;
 // you now have a variable named 'timeout',
@@ -603,14 +603,14 @@ class: thin-margin-page-header
 #### Principes
 
 - Similaire à Angular 1,
-- Permet de gérer les appels asynchone,
+- Permet de gérer les appels asynchones,
 - Ne peut être résolue qu'une fois,
 - Interception des erreurs,
 - Plus lisible que les callbacks.
 
 .row[
 .col-sm-6.col-md-6[
-#### Avec les callback
+#### Avec les callbacks
 ``` javascript
 getUser(login, function (user) {
   getRights(user, function (rights) {
@@ -698,7 +698,7 @@ Nouvelle façon d’écrire des APIs, et toutes les bibliothèques vont bientôt
 ---
 .page-header[
   # 02.9
-  ## ES6 - Arrow functions
+  ## ES6 - Arrow function
 ]
 
 
@@ -742,11 +742,11 @@ le this reste le this de la function parent
 #### API ou convention existante
 
 - CommonJS (NodeJS) avec une **syntaxe simple**,
-- RequireJS (AMD) pour le **chargement Asynchrone**.
+- RequireJS (AMD) pour le **chargement asynchrone**.
 
 #### Objectifs ES6
 
-- Créer une syntaxe conciliant CommonJS / AMD,
+- Création d'une syntaxe conciliant CommonJS / AMD,
 - Analyse statique du code,
 - Gestion claire des dépendances cycliques.
 ]
@@ -774,7 +774,7 @@ start();
 ]
 .clearfix[
 
->.center[Fondamentale dans Angular 2]
+>.center[Fondamental dans Angular 2]
 ]
 ???
 API AMD (Asynchronous Module Definition)
@@ -828,7 +828,7 @@ import Player from './player';
 
 #### Compatibilité
 
-Tester la comptibilité ES6 : [http://kangax.github.io/compat-table/es6/](http://kangax.github.io/compat-table/es6/)
+Tester la compatibilité ES6 : [http://kangax.github.io/compat-table/es6/](http://kangax.github.io/compat-table/es6/)
 
 #### Transpileur
 
@@ -918,10 +918,10 @@ Avec la mise a disposition de TypeScript (open source), la version 1.5 (en 2015)
 .pull-left[
 
 #### Principes
-- Extension `.ts` (par convention) ou `.tsx` pour du ReactJS,
-- Compiler en JavaScript standard (ES3, ES5, ES2015),
-- Support des structures CommonJS, AMD et SystemJS,
-- Code généré est très lisible.
+- Gère  les extensions `.ts` (par convention) ou `.tsx` pour du ReactJS,
+- Compile en JavaScript standard (ES3, ES5, ES2015),
+- Supporte les structures CommonJS, AMD et SystemJS,
+- Génère un code est très lisible.
 
 ]
 
@@ -954,7 +954,7 @@ tsc.cmd test.ts
 - **Mix** : number | boolean
 
 
->.center[Les **basics** peuvent être définit à l'initialisation !]
+>.center[Les **basics** peuvent être défini à l'initialisation !]
 
 ]
 
@@ -992,7 +992,7 @@ class: thin-margin-page-header
 #### Objectifs
 
 - Continuer d'utiliser la nature dynamique de JavaScript,
-- Décrire et typer les librairies ou frameworks JavaScript pré-existant.
+- Décrire et typer les librairies ou frameworks JavaScript préexistants.
 ]
 .pull-right[
 #### Exemple
@@ -1080,7 +1080,7 @@ function startGame(theCase) {
 
 #### Exercice !
 
-*Avec tous ce que l'on vient de voir, convertissez cette fonction en version TypeScript et lancez-la.*
+*Avec tout ce que l'on vient de voir, convertissez cette fonction en version TypeScript et lancez-la.*
 
 ]
 
@@ -1127,8 +1127,8 @@ startGame(theCase);
 
 #### Principes
 
-- Une **classe** peut implémenter une ou plusieurs interfaces,
-- Une **interface** peut étendre une ou plusieurs interfaces.
+- Une **classe** peut implémenter une ou plusieurs interface(s),
+- Une **interface** peut étendre une ou plusieurs interface(s).
 
 ``` typescript
 interface ICaseProperty extends ICase, ICasePrice {}
@@ -1179,7 +1179,7 @@ class PlayerWithoutShortcut {
 }
 ```
 
->.center[L'attribut `private` ne sera pas accessible depuis l'exterieur de la classe !]
+>.center[L'attribut `private` ne sera pas accessible depuis l'extérieur de la classe !]
 
 ]
 
@@ -1259,15 +1259,18 @@ Vérification à la compilation uniquement
 
 .pull-left[
 
-#### Les ambient files definition `.d.ts`
+#### Les *ambient files definitions* `.d.ts`
 
-- S'utilise avec des bibliothèques externes écrites en JS,
-- Permet de typer du code JavaScript via les interfaces TypeScript,
-- Interface ecrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped),
+.clearfix[
+- S'utilisent avec des bibliothèques externes écrites en JS,
+- Permettent de typer du code JavaScript via les interfaces TypeScript,
+]
+<br />
+- Interface écrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped),
 - Ou TSD [http://definitelytyped.org/](http://definitelytyped.org/),
 - Ou plus récemment l'outil [Typings](https://github.com/typings/typings) réunissant les dépôts de TSD, NPM et GIT,
 - Ou encore plus récemment `@types`, directement disponible via NPM (compatible Typescript 2.0+),
-- Autonome si elles sont packagées avec npm (depuis TS 1.6).
+- Autonoment si elles sont packagées avec npm (depuis TS 1.6).
 ]
 
 .pull-right[
@@ -1291,7 +1294,7 @@ angular.module(10, []); // the module name should be a string
 // Argument of type 'number' is not 
 //assignable to parameter of type 'string'.
 ```
->.center[Facultatif et inutile depuis TS 1.6 !]
+>.center[Facultatif depuis TS 1.6 !]
 ]
 
 ???
@@ -1315,10 +1318,10 @@ Exemple pour angular 1
 #### Principes
 
 - Ajouter pour angular 2 *(AtScript)* à TypeScript,
-- Applicable à une class, attribut, fonction/méthode, paramètre,
-- Préfixé par `@`,
-- Est une fonction prenant différents argument suivant le context,
-- Peut aussi être paramètré (factory),
+- Applicables à une class, attribut, fonction/méthode, paramètre,
+- Préfixés par `@`,
+- Sont des fonctions prenant différents arguments suivant le contexte,
+- Peuvent aussi être paramétrés (factory),
 - On peut créer nos propres décorateurs.
 
 #### Exemple Angular 2
@@ -1714,7 +1717,7 @@ Ne pas confondre avec les modules ES6, ce sont des modules Angular.
 Il y a toujours un module racine.
 
 **@NgModule** prends plusieurs paramètres :
-- `import`: importer d'autre modules Angular,
+- `import`: importer d'autres modules Angular,
 - `declarations`: déclarer les composants qui appartiennent à notre module,
 - `bootstrap`: déclarer le composant racine (premier instancier).
 ]
@@ -1741,7 +1744,7 @@ Nous reviendrons plus tard dessus avec une section dédier pour le reste des att
   ## Bootstrap
 ]
 
-Il existe plusieurs façon de démarer angular en fonction de l'usage (server, web worker, browser...)
+Il existe plusieurs façons de démarrer Angular en fonction de l'usage (server, web worker, browser...)
 
 - Importer `@angular/platform-browser-dynamic`,
 - Appel de la méthode bootstrap avec le module principale.
@@ -1769,7 +1772,7 @@ platformBrowserDynamic().bootstrapModule(AppModule).catch(e => console.log(e));
   ## Gestion des scripts
 ]
 
->.center[Plus complexe mais plus puissant. Basé sur les loaders ES6, il y a plusieurs options d'outils !]
+>.center[Plus complexe mais plus puissant. Basée sur les loaders ES6, il y a plusieurs options d'outils !]
 
 .pull-left[
  
@@ -2027,7 +2030,7 @@ L'évaluation :
 ```html
 <component [property]="doSomething()"></component>
 ```
-Et le binding d'évènement :
+Et le binding d'événement :
 ```html
 <component (event)="doSomething()"></component>
 ```
@@ -2090,7 +2093,7 @@ Permet de créer une référence vers un composant :
 #### Directive de structure
 
 - Une directive est assez proche d’un composant, mais n’a pas de template. On les utilise pour ajouter un comportement à un élément,
-- S’appuient sur l’élément `<template>`,
+- S’appuie sur l’élément `<template>`,
 - Celles fournies par le framework sont déjà pré-chargées (ngIf, ngSwitch, ngFor, etc...)
 
 #### Exemple
@@ -2216,7 +2219,7 @@ template: splited-page
 
 #### @Injectable
 
- Permet de déclarer une classe comme étant injectable dans les autres composants Angular 2.
+ Permettent de déclarer une classe comme étant injectable dans les autres composants Angular 2.
  
  Bien entendu il faut aussi déclarer la dépendance dans le `app.module.ts` !
   
@@ -2303,10 +2306,10 @@ template: splited-page
 
 .pull-left[
 - Le "tuyaux" vient de l'utilisation du caractère `|`,
-- Ils sont utilisable directement dans le html,
+- Ils sont utilisables directement dans le html,
 - Ainsi que dans le code (injectable),
-- Ils sont chainable,
-- Et parametrable avec le symbole `:`,
+- Ils sont chaînables,
+- Et paramétrables avec le symbole `:`,
 - Filtres de base : 
  + json, 
  + async,
@@ -2346,7 +2349,7 @@ export class SlicePipe implements PipeTransform {
 ]
 
 ???
-Le pipe number par exemple change radicalement dans sa façon d'etre configuré.
+Le pipe number par exemple change radicalement dans sa façon d'être configuré.
 ---
 template: splited-page
 
@@ -2566,7 +2569,7 @@ export class OnInitDirective implements OnInit {
 
 .right-column.margin-top-50[
 
-#### L'application est piloté par les données
+#### L'application est pilotée par les données
 
 .row[
 
@@ -2680,7 +2683,7 @@ pure fonction JavaScript pour bénéficier du **inline-caching**.
 
 #### Recommandation
 
-- Etre stateless,
+- Être stateless,
 - Utiliser des données Immutable,
 - Ou Observable (programmation réactive),
 - Indiquer à Angular que le composant utilise la stratégie `onPush`.
@@ -2716,17 +2719,17 @@ Il y a donc un cache qui est créé, d’où le nom, inline caching.
 .pull-left[
 #### Principes
 
-- Tout est flux et séquence ordonnées d'événements,
+- Tout est flux et séquences ordonnées d'événements,
 - Les événements sont représentés par :
   - Les valeurs / données,
   - Des erreurs,
   - Et des terminaisons.
 - Très proche des tableaux,
-- Différent des Promises...
+- Différente des Promises...
 - ...car ce n'est pas à usage unique.
 
 .clearfix[
-> .center[Concrêtement, nous aurons en programmation réactive, le flux appelé Observable et le listener l'observer.]
+> .center[Concrètement, nous aurons en programmation réactive, le flux appelé Observable et le listener l'observer.]
 ]
 ]
 
@@ -2769,7 +2772,7 @@ template: chapter-page
   ## Test unitaire
 ]
 
-Permet de verifier des petites portions de code de façon isolé.
+Permet de vérifier des petites portions de code de façon isolée.
 
 .pull-left[
 #### Les outils
@@ -2796,7 +2799,8 @@ Permet de verifier des petites portions de code de façon isolé.
 ]
 
 ???
-Une astuce : si tu utilises fdescribe() au lieu de describe() alors cette seule suite de tests sera exécutée (le "f" ajouté signifie "focus"). Même chose si tu ne veux exécuter qu’un seul test : utilise fit() au lieu de it(). Si tu veux exclure un test, utilise xit(), ou xdescribe() pour une suite de tests. 
+Une astuce : si tu utilises fdescribe() au lieu de describe() alors cette seule suite de tests sera exécutée (le "f" ajouté signifie "focus").
+ Même chose si tu ne veux exécuter qu’un seul test : utilise fit() au lieu de it(). Si tu veux exclure un test, utilise xit(), ou xdescribe() pour une suite de tests. 
   
 ---
 
@@ -2808,7 +2812,7 @@ Une astuce : si tu utilises fdescribe() au lieu de describe() alors cette seule 
 L'équipe d'Angular nous met à disposition des méthodes :
  - `inject`,
  - `addProviders` pour initialiser les dépendances,
- - `async` pour gérer les appels asynchrone.
+ - `async` pour gérer les appels asynchrones.
 
 ``` typescript
 import { inject, addProviders } from '@angular/core/testing';
@@ -2877,7 +2881,7 @@ template: splited-page
 ]
 
 .pull-left[
-#### Pour ce faire nous aurons besoin
+#### Pour se faire nous aurons besoin
 
 - D'instancier notre composant avec `TestComponentBuilder`,
 - De récupérer une représentation du composant `ComponentFixture`,
