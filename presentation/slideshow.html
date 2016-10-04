@@ -11,18 +11,22 @@
 </head>
 <body>
 
-<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+<script src="remark.min.js"></script>
 <script>
-    var slideshow = remark.create({
-        sourceUrl: 'prez.md',
-        highlightStyle: 'agate',
-        ratio: '16:9',
-        navigation: {
-            scroll: false
-        },
-        slideNumberFormat: '%current%',
-    });
+    document.addEventListener('DOMContentLoaded', function(){
+        setTimeout(function(){
+            var slideshow = remark.create({
+                sourceUrl: 'prez.md',
+                highlightStyle: 'agate',
+                ratio: '16:9',
+                navigation: {
+                    scroll: false
+                },
+                slideNumberFormat: '%current%',
+            });
+        }, 700);
+    })
+
 </script>
-<script></script>
 </body>
 </html>

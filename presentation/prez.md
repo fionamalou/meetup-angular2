@@ -135,7 +135,7 @@ template: chapter-page
 
 
 .pull-left[
-Publié en Juin 2015 et rénommé ES2015. Cette spécification apporte les features suivantes : 
+Publié en Juin 2015 et renommé ES2015. Cette spécification apporte les features suivantes : 
 
 - Scope (var, let)
 - Arrow functions
@@ -223,15 +223,16 @@ sinon il y a un défaut dans le code
 ]
 
 L'instruction **const** :
-- est une constante 
-- porté du bloc comme let
-- uniquement en get
+- Est une constante,
+- Porté du bloc comme let,
+- Uniquement en get,
 
 ``` javascript
 const NB_PLAYERS_MAX = 6;
 NB_PLAYERS_MAX = 7; // SyntaxError
 ```
-- Update attribut de l'objet ou tableau
+
+Mise à jour des attributs de l'objet ou tableau possible !
 
 ``` javascript
 //Objet
@@ -258,14 +259,22 @@ PLAYERS = []; // SyntaxError
 .right-column[
 Ce nouveau raccourci permet de créer des objets :
 
+.row[
+.col-sm-6.col-md-6[
 #### ES5
 ``` javascript
 function createPlayer() {
   let name = 'John';
   let color = 'blue';
-  return { name: name, color: color };//ES5
+  return { 
+    name: name, 
+    color: color 
+  };//ES5
 }
 ```
+
+]
+.col-sm-6.col-md-6[
 #### ES6
 ``` javascript
 function createPony() {
@@ -274,9 +283,11 @@ function createPony() {
   return { name, color };//ES6
 }
 ```
+
+]
+]
 >.center[Ici la propriété de l’objet = nom de la variable !]
 ]
-
 
 
 ---
@@ -295,6 +306,7 @@ class: thin-margin-page-header
 
 .right-column[
 Il permet d'affecter des variables à partir d’objets ou de tableaux.
+
 
 #### ES5
 ``` javascript
@@ -380,15 +392,11 @@ function getPlayes(size, page) {
 #### ES6
 ``` javascript
 function getPlayers(size = 10, page = 1) {
-  // ...
+  //...
   server.get(size, page);
 }
-function getPlayers(size = defaultSize(), page = 1) {
-  //Can call a function
-}
-function getPlayers(size = defaultSize(), page = size - 1) {
-  //Can use previous parameters
-}
+function getPlayers(size = defaultSize(), page = 1) {}
+function getPlayers(size = defaultSize(), page = size - 1) {}
 ```
 ]
 
@@ -425,7 +433,7 @@ class: col-larger
   ## ES6 - Rest operator
 ]
 
-Permet d'utiliser la liste des argusments **proprement**.
+Permet d'utiliser la liste des arguments **proprement**.
 
 .pull-left[
 #### ES5
@@ -451,15 +459,15 @@ function addPlayers(...players) {
 ```
 ]
 
-<div class="clearfix" style="padding-top: 30px">
-<blockquote>
-.center[
- *Ne pas confondre avec spread operator ("opérateur d’étalement")*
- <br />
- `let minPrice = Math.min(...[12,3,5]);`
+.clearfix[
+<br />
+  >.center[
+  Ne pas confondre avec spread operator ("opérateur d’étalement")
+   <br />
+   `let minPrice = Math.min(...[12,3,5]);`
+  ]
 ]
-</blockquote>
-</div>
+
 
 ???
 ES5: 
@@ -587,15 +595,21 @@ class: thin-margin-page-header
 ]
 
 .left-column[
-  ### Principe
+  ### Principes
 ]
 
 .right-column[
 
-- Similaire à Angular 1
-- Permet de gérer l'asynchone
-- Plus lisible que les callbacks
+#### Principes
 
+- Similaire à Angular 1,
+- Permet de gérer les appels asynchone,
+- Ne peut être résolue qu'une fois,
+- Interception des erreurs,
+- Plus lisible que les callbacks.
+
+.row[
+.col-sm-6.col-md-6[
 #### Avec les callback
 ``` javascript
 getUser(login, function (user) {
@@ -604,6 +618,8 @@ getUser(login, function (user) {
   });
 });
 ```
+]
+.col-sm-6.col-md-6[
 #### Avec les promises
 ``` javascript
 getUser(login)
@@ -615,6 +631,8 @@ getUser(login)
   })
 ```
 ]
+]
+]
 
 ---
 
@@ -624,41 +642,37 @@ getUser(login)
 ]
 
 .left-column[
-  ### Principe
+  ### Principes
   ### Méthodes
 ]
 
 .right-column[
 
-Expose les méthodes `then` et `catch` 
 
-``` javascript
-asynchoneFunction().then(siSucces, siRejetée);
-asynchoneFunction().catch(siRejetée); //= .then(undefined, siRejetée)
-```
 
-3 états :
+.row[
+.col-sm-4.col-md-4[
+#### 3 états
 
 - Pending (en cours), 
 - Fulfilled (réalisée), 
-- rejected (rejetée)
+- Rejected (rejetée).
+
 ]
 
----
-.page-header[
-  # 02.8
-  ## ES6 - Promise
+.col-sm-8.col-md-8[
+
+Expose les méthodes `then` et `catch` :
+
+``` javascript
+asynchoneFunction().then(siSucces, siRejetée);
+asynchoneFunction()
+   .catch(siRejetée); 
+   //= .then(undefined, siRejetée)
+```
 ]
-
-.left-column[
-  ### Principe
-  ### Méthodes
-  ### Création
-]
-
-.right-column[
-
-Exemple de contruction d'une nouvelle promise (class Promise) :
+.col-sm-12.col-md-12[
+#### Exemple de contruction d'une nouvelle promise
 
 ``` javascript
 let getUser = function (login) {
@@ -673,6 +687,8 @@ let getUser = function (login) {
   });
 };
 ```
+]
+]
 ]
 
 ???
@@ -726,13 +742,13 @@ le this reste le this de la function parent
 #### API ou convention existante
 
 - CommonJS (NodeJS) avec une **syntaxe simple**,
-- RequireJS (AMD) pour le **chargement Asynchrone**
+- RequireJS (AMD) pour le **chargement Asynchrone**.
 
 #### Objectifs ES6
 
 - Créer une syntaxe conciliant CommonJS / AMD,
 - Analyse statique du code,
-- Gestion claire des dépendances cycliques
+- Gestion claire des dépendances cycliques.
 ]
 
 --
@@ -1109,6 +1125,8 @@ startGame(theCase);
 
 .right-column[
 
+#### Principes
+
 - Une **classe** peut implémenter une ou plusieurs interfaces,
 - Une **interface** peut étendre une ou plusieurs interfaces.
 
@@ -1248,6 +1266,7 @@ Vérification à la compilation uniquement
 - Interface ecrite par la [communauté](http://www.nuget.org/packages?q=DefinitelyTyped),
 - Ou TSD [http://definitelytyped.org/](http://definitelytyped.org/),
 - Ou plus récemment l'outil [Typings](https://github.com/typings/typings) réunissant les dépôts de TSD, NPM et GIT,
+- Ou encore plus récemment `@types`, directement disponible via NPM (compatible Typescript 2.0+),
 - Autonome si elles sont packagées avec npm (depuis TS 1.6).
 ]
 
@@ -1256,6 +1275,11 @@ Vérification à la compilation uniquement
 ``` bash
 npm install --global typings
 typings install --save --ambient angular
+```
+
+#### Utilisation avec @types (TS 2.0)
+``` bash
+npm install --save-dev @types/jasmine
 ```
 
 #### Référencement
@@ -1267,7 +1291,7 @@ angular.module(10, []); // the module name should be a string
 // Argument of type 'number' is not 
 //assignable to parameter of type 'string'.
 ```
->.center[Facultatif depuis TS 1.6 !]
+>.center[Facultatif et inutile depuis TS 1.6 !]
 ]
 
 ???
@@ -1286,7 +1310,9 @@ Exemple pour angular 1
     
 ]
 
-.right-column[
+.right-column.margin-top-30[
+
+#### Principes
 
 - Ajouter pour angular 2 *(AtScript)* à TypeScript,
 - Applicable à une class, attribut, fonction/méthode, paramètre,
@@ -1413,7 +1439,7 @@ class: splited-page
 .pull-left[
 - Orienté composants : 
    - *Angular 1.2 : controller + template, directive,*
-   - *Angular 1.5 : component*
+   - *Angular 1.5 : component*.
 - Web moderne avec : 
    - WebComponent,
    - ES6 mais ES5 aussi !
@@ -1422,7 +1448,7 @@ class: splited-page
    - Traceur ou Babel,
 - Injection de dépendance,
 - Les tests,
-- Toujours magique mais fonctionne de manière différente (Zone)
+- Toujours magique mais fonctionne de manière différente (Zone.js).
 ]
 
 .pull-right[
@@ -1683,14 +1709,14 @@ template: splited-page
 .pull-left[
 #### @NgModule
 
-Ne pas confondre avec les modules ES6, ce sont des modules Angular
+Ne pas confondre avec les modules ES6, ce sont des modules Angular.
 
 Il y a toujours un module racine.
 
 **@NgModule** prends plusieurs paramètres :
 - `import`: importer d'autre modules Angular,
 - `declarations`: déclarer les composants qui appartiennent à notre module,
-- `bootstrap`: déclarer le composant racine (premier instancier)
+- `bootstrap`: déclarer le composant racine (premier instancier).
 ]
 .pull-right.margin-top-p30[
 ```typescript
@@ -2084,14 +2110,37 @@ Version courte :
 ]
 
 ---
-## Templates
-### Syntaxe canonique
-- plus verbeux
-- intéressant si ton moteur de template côté serveur a du mal avec les notations [] ou ()
+.page-header[
+  # 04.7
+  ## Template
+]
+
+.left-column[
+
+### Dépendance
+### Le binding
+### Evénements
+### Variables locales
+### Directive de structure
+### En résumé
+
+]
+
+.right-column.margin-top-50[
+
+#### Les annotations
+
+- `{{}}` pour l’interpolation,
+- `[]` pour le binding de propriété,
+- `()` pour le binding d’événement,
+- `#` pour la déclaration de variable,
+- `*` pour les directives structurelles.
+
+#### Syntaxe canonique
 
 ```html
-<ns-pony [name]="pony.name"></ns-pony>
-<ns-pony bind-name="pony.name"></ns-pony>
+<mn-player [name]="player.name"></ns-pony>
+<mn-player bind-name="player.name"></ns-pony>
 
 <button (click)="onButtonClick()">Click me!</button>
 <button on-click="onButtonClick()">Click me!</button>
@@ -2102,98 +2151,250 @@ Version courte :
 <button (click)="name.focus()">Focus the input</button>
 ```
 
----
-## Templates
-### Résumé
-- `{{}}` pour l’interpolation,
-- `[]` pour le binding de propriété,
-- `()` pour le binding d’événement,
-- `#` pour la déclaration de variable,
-- `*` pour les directives structurelles.
-
----
-## Injection de dépendances
-
-Inversion de contrôle:
-- le développement est simplifié
-- le test est simplifié avec des mock
-- a configuration est simplifiée
-
-singleton
-
-//TODO
-
-???
-le développement est simplifié, on exprime juste ce que l’on veut, où on le veut.
-
-le test est simplifié, en permettant de remplacer les dépendances par des versions bouchonnées.
-
-la configuration est simplifiée, en permutant facilement différentes implémentations.
+]
 
 
 ---
-## Pipes
+template: splited-page
 
-- "tuyaux" vient de l'utilisation du caractère `|`
-- utilisable directement dans le html
-- utilisable dans le code (injectable)
-- chainable
-- parametrable `:`
-- json, slice, uppercase, lowercase, replace, number, percent, currency, date, async
+.page-header[
+  # 04.8
+  ## Injection de dépendances
+]
 
-Equivalent des filtres dans Angular 1
+.pull-left[
+
+#### Inversion de contrôle
+
+- Le développement est simplifié,
+- Les services peuvent être mockés,
+  - Pour les tests,
+  - Ou pendant le développement de l'application !
+- La configuration est simplifiée.
+
+#### Oui mais où ?
+
+- Component,
+- Directive,
+- Service,
+- Pipe.
+
+]
+
+.pull-right.margin-top-p30[
+
+``` typescript
+import { PlayersService } from './players.service';
+
+@Component({
+  selector: 'mn-players',
+  template: '<mn-player *ngFor="let player of players"
+                        [player]="player"></mn-player>'
+})
+export class PlayersComponent {
+
+  players: IPlayer[];
+
+  constructor(playerService: PlayersService) {
+    PlayersService
+        .get()
+        .then(players => this.players = players);
+  }
+}
+```
+]
+
+---
+template: splited-page
+
+.page-header[
+  # 04.8
+  ## Les services
+]
+
+.pull-left[
+
+#### @Injectable
+
+ Permet de déclarer une classe comme étant injectable dans les autres composants Angular 2.
+ 
+ Bien entendu il faut aussi déclarer la dépendance dans le `app.module.ts` !
+  
+#### Les services Angular
+
+- Http,
+- Router,
+- Location,
+- EventEmmitter.
+
+
+> .center[https://angular.io/docs/ts/latest/api/]
+
+]
+
+.pull-right.margin-top-100[
+
+``` typescript
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+@Injectable()
+export class PlayersService {
+
+  constructor(private http: Http) {}
+  
+  public get() {
+    return this.http
+        .get(`rest/players`)
+        .map(response => response.json())
+        .toPromise();
+  }
+}
+---
+import ...
+import { PlayersService } from './services/players.service';
+
+@NgModule({
+  imports: [BrowserModule, HttpModule],
+  declarations: [PlayersComponent],
+  providers: [
+    PlayersService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+]
+
+---
+
+.page-header[
+  # 04.9
+  ## Mocker un service
+]
+
+```typescript
+import ...
+import { PlayersService } from './services/players.service';
+import { FakePlayersService } from './services/fakePlayers.service';
+
+@NgModule({
+  imports: [BrowserModule, HttpModule],
+  declarations: [PlayersComponent],
+  providers: [
+    {provide: PlayersService, useClass: FakeRaceService}
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}
+```
+<br />
+> .center[useClass nous permet de remplacer la classe PlayersService par un Faker. Pratique !!]
+
+---
+template: splited-page
+
+.page-header[
+  # 04.10
+  ## Les pipes
+]
+
+.pull-left[
+- Le "tuyaux" vient de l'utilisation du caractère `|`,
+- Ils sont utilisable directement dans le html,
+- Ainsi que dans le code (injectable),
+- Ils sont chainable,
+- Et parametrable avec le symbole `:`,
+- Filtres de base : 
+ + json, 
+ + async,
+ + slice, 
+ + uppercase, lowercase, replace, 
+ + number, percent, currency, 
+ + date.
+
+> .center[Quasiment identique aux filtres Angular 1 !]
+]
+
+.pull-right[
+
+#### Exemple
 
 ```html
 <p>{{ players | slice:0:2 | json }}</p>
 ```
-donnera:
+#### Donnera
 ```html
 <p>[ { "name": "John" }, { "name": "Rosa" } ]</p>
 ```
 
----
-## Pipes
-### Un pipe fait maison
+#### Déclaration
 
 ``` typescript
 import { PipeTransform, Pipe } from '@angular/core';
 
-@Pipe({ name: 'fromNow' })
-export class FromNowPipe implements PipeTransform {
-  transform(value, args) {
-    // do something here
+@Pipe({ name: 'slice' })
+export class SlicePipe implements PipeTransform {
+  transform(list: any[], start: number, end: number) {
+     return list.slice(start, end);
   }
 }
 ```
 
+]
+
+???
+Le pipe number par exemple change radicalement dans sa façon d'etre configuré.
 ---
-## Programmation réactive
+template: splited-page
 
-//TODO
+.page-header[
+  # 04.11
+  ## Les directives et le bindings
+]
 
----
-## Directives
+.pull-left[
+#### @Directive
 
-- Une directive est très semblable à un composant, sauf qu’elle n’a pas de template,
-- La classe Component hérite de la classe Directive dans le framework
-- `@Directive`
-- Selecteur css :
+- Une directive est très semblable à un composant sauf qu’elle n’a pas de template,
+- La classe @Component hérite de la classe @Directive dans le framework,
+- Selecteur CSS :
   + element : `footer`
-  + class: `.alert`
-  + attribut: `[color]` avec une valeur `[color=red]`
+  + class : `.alert`
+  + attribut : `[color]` avec une valeur `[color=red]`
+  
+#### Les entrées -  @Input
+ 
+  - Un binding (`=`) : utiliser `[]`,
+  - Une valeur (`@`) : utiliser seulement l'attribut,
+  - besoin d'un watch : utiliser le setter `set attribut(value)`.
 
+]
+
+.pull-right.margin-top-p30[
 ``` typescript
 @Directive({
-  selector: '[color],footer.alert'
+  selector: '[loggable]',
+  inputs: ['text: logText'] // 1er version
 })
-export class DoNothingDirective {
+export class LoggableDirective {
 
-  constructor() {
-    console.log('Do nothing directive');
+  constructor() {}
+  
+  //OU 2e version
+  @Input() logText;
+  
+  //OU équivalent du watch Angular 1
+  @Input()
+  set logText(text){
+     console.log(text);
   }
 }
-
 ```
+]
+
 
 ???
 selecteur par class à éviter
@@ -2204,34 +2405,352 @@ Les sélecteurs CSS à base de descendants, de frères, ou d’identifiants, et 
 Ne nomme pas tes sélecteurs avec un préfixe bind-, on-, let- ou ref- : ils ont une autre signification pour le parseur, car ils font partie de la syntaxe canonique des templates.
 
 ---
-## Directives et les paramètres
 
-- un binding (`=`): utiliser `[]`
-- une valeur (`@`): utiliser seulement l'attribut
-- besoin d'un watch: utiliser le setter `set attribut(value)`
+.page-header[
+  # 04.12
+  ## Communication entres composants
+]
 
-2 façon de faire:
-.pull-left[
-``` typescript
-@Directive({
-  selector: '[loggable]',
-  inputs: ['text: logText']
+.row[
+
+.col-lg-4.col-sm-4[
+
+#### Deux solutions
+
+- Soit par un service,
+- Soit par les événements.
+
+#### Les sorties - @Output
+
+Il y aura trois étapes à réaliser :
+
+- Déclarer la sortie `outputs` dans le décorateur ou `@Ouput()`,
+- Créer un EventEmitter,
+- Et émettre un événement quand un élément est sélectionné.
+
+]
+
+.col-lg-8.col-sm-8.margin-top-30[
+
+```typescript
+@Component({
+  selector: 'mn-players',
+  template: '<mn-player *ngFor="let player of players"
+                        [player]="player"
+                        (click)="onPlayerClicked(player)"></mn-player>'
 })
-export class SimpleTextDirective {
-}
+export class PlayersComponent {
 
+  @Ìnput()
+  private players: IPlayer[];
+
+  @Output()
+  private playerClicked: EventEmitter<IPlayer> = new EventEmitter<IPlayer>();
+
+  private onPlayerClicked(player: IPlayer) {
+    this.playerClicked.emit(player);
+  }
+}
+```
+
+#### Pendant ce temps...
+
+```typescript
+<mn-players [players]="players" 
+            (onPlayerClicked)="playerClicked($event)">
+</mn-players>
 ```
 ]
-.pull-right[
-``` typescript
-@Directive({
-  selector: '[loggable]'
-})
-export class InputDecoratorDirective {
-  @Input('logText') text: string;
-}
 
+]
+
+---
+.page-header[
+  # 04.13
+  ## Cycle de vie
+]
+
+> .center[Les inputs ne sont pas encore évalué dans le constructor()]
+
+.pull-left[
+Il faut utiliser une phase du cycle de vie telles que :
+
+- `ngOnInit` lorsque le composant est initialisé,
+- `ngOnChanges` appelée à chaque fois qu'il y a un changement,
+- `ngOnDestroy` appelée lors destruction du composant,
+
+Autres phases plus avancées : 
+
+- `ngDoCheck`,
+- `ngAfterContentInit`,
+- `ngAfterContentChecked`,
+- `ngAfterViewInit`,
+- `ngAfterViewChecked`.
+]
+
+.pull-right[
+```typescript
+@Directive({
+  selector: '[initDirective]'
+})
+export class OnInitDirective implements OnInit {
+
+  @Input() playerName: string;
+
+  ngOnInit() {
+    console.log(`inputs are ${this.playerName}`);
+    // inputs are not undefined \o/
+  }
+
+}
 ```
+]
+
+---
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+.left-column[
+ ### Angular 1
+]
+
+.right-column[
+<img src="images/angular1-lifecycle.png" style="width: 80%" />
+]
+
+---
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+.left-column[
+ ### Angular 1
+ ### Zone.js
+]
+
+.right-column[
+#### Principes
+
+- Une zone est un contexte d'exécution,
+- Le code à éxecuter peut être synchrone ou asynchrone,
+- Nous indique :
+ - Comment exécuter notre code,
+ - Comment intercepter des erreurs,
+ - Comment stocker des variables locales à ce contexte.
+
+<br />
+
+> .center[Zone.js va patcher l'ensemble des méthodes asynchrone du navigateur !]
+
+> .center[Plus besoin de services spéciaux Angular. Nous pouvons utiliser les setTimeout & co !]
+
+]
+
+
+---
+
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+.left-column[
+ ### Angular 1
+ ### Zone.js
+ ### Angular 2
+]
+
+
+.right-column.margin-top-50[
+
+#### L'application est piloté par les données
+
+.row[
+
+.col-md-6.center[
+    
+ Data model
+  
+ ![DataModel](images/angular-2-data-state.jpg)
+]
+
+.col-md-6.center[
+  Components
+ ![DataModel](images/angular-2-component-state.jpg)
+  
+]
+
+]
+]
+
+---
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+.left-column[
+ ### Angular 1
+ ### Zone.js
+ ### Angular 2
+]
+
+
+.right-column.margin-top-50[
+
+#### Mise à jour de données
+
+.row[
+
+.col-md-6.center[
+    
+ Data model
+  
+ ![DataModel](images/angular-2-data-state-change.jpg)
+]
+
+.col-md-6.center[
+  Components
+ ![DataModel](images/angular-2-component-state-change.jpg)
+  
+]
+
+]
+]
+
+---
+
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+.left-column[
+ ### Angular 1
+ ### Zone.js
+ ### Angular 2
+]
+
+.right-column.margin-top-15[
+.row[
+  .col-md-6.col-sm-6[
+#### Détection des changements
+
+- Contrairement à Angular 1, les composants ne peuvent changer le modèle du parent,
+- Le flux de propagation est dit top-bottom (racine vers les enfants),
+- La détection est définie au niveau du composant,
+- Fini les changements de modèle en cascade,
+- Plus de boucle infinie,
+- La détection des changements est plus rapide !
+
+
+  ]
+  .col-md-6.col-sm-6.center[
+   ![DataModel](images/angular-2-change-detection-flow.jpg)   
+  ]
+ ]
+ 
+ .col-md-12[
+ > .center[En mode dev, l'algorithme de détection des changements effectue une 2<sup>e</sup> passe pour vérifier d'éventuel effet de bord.]
+ ]
+]
+
+---
+.page-header[
+  # 04.14
+  ## Détection des changements
+]
+
+
+.left-column[
+ ### Angular 1
+ ### Zone.js
+ ### Au niveau composants
+ ### Optimisation
+]
+
+.right-column.margin-top-50[
+
+#### L'algorithme
+L'équipe d'Angular a optimisé l'algorithme en utilisant le principe de 
+pure fonction JavaScript pour bénéficier du **inline-caching**.
+
+#### Recommandation
+
+- Etre stateless,
+- Utiliser des données Immutable,
+- Ou Observable (programmation réactive),
+- Indiquer à Angular que le composant utilise la stratégie `onPush`.
+
+#### Exemple
+
+```typescript
+@Component({
+    selector: 'mn-pawn',
+    template: '...',
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+```
+]
+
+???
+
+C’est une technique très ancienne (inventée pour SmallTalk je crois, 
+soit près de 40 ans, une éternité en informatique), pour un principe finalement assez simple : 
+si un programme appelle une méthode beaucoup de fois avec le même type d’objet, 
+la VM devrait se rappeler de quelle façon elle évalue les propriétés des objets en question. 
+Il y a donc un cache qui est créé, d’où le nom, inline caching. 
+ La VM commence donc par regarder dans le cache si elle connaît le type d’objet 
+ qu’elle reçoit, et si c’est le cas, utilise la méthode optimisée de chargement.
+ 
+ 
+---
+.page-header[
+  # 04.15
+  ## Programmation réactive - RxJs
+]
+
+.pull-left[
+#### Principes
+
+- Tout est flux et séquence ordonnées d'événements,
+- Les événements sont représentés par :
+  - Les valeurs / données,
+  - Des erreurs,
+  - Et des terminaisons.
+- Très proche des tableaux,
+- Différent des Promises...
+- ...car ce n'est pas à usage unique.
+
+.clearfix[
+> .center[Concrêtement, nous aurons en programmation réactive, le flux appelé Observable et le listener l'observer.]
+]
+]
+
+.pull-right.margin-top-50[
+
+#### Exemple
+```typescript
+Observable.range(1, 5)
+  .map(x => x * 2)
+  .filter(x => x > 5)
+  .subscribe(x => console.log(x), error => console.log(error), () => console.log('done'));
+// 6, 8, 10, done
+```
+
+#### Fonctionnalités
+- Transformation (delaying, debouncing…​)
+- Combinaison (merge, zip, combineLatest…​)
+- Filtrage (distinct, filter, last…​)
+- Mathématique (min, max, average, reduce…​)
+- Conditions (amb, includes…​)
+
+#### Dans Angular 2
+- EventEmitter est un adaptater d'Observable,
+- Le service Http retourne un Observable.
 ]
 
 ---
@@ -2283,35 +2802,6 @@ Une astuce : si tu utilises fdescribe() au lieu de describe() alors cette seule 
 
 .page-header[
   # 05.2
-  ## Test unitaire - Exemple
-]
-
-Notre fichier de test `pony.spec.ts` :
-
-``` typescript
-describe('Pony', () => {
-  let pony: Pony;
-
-  beforeEach(() => {
-    pony = new Pony('John', 10);
-  });
-
-  it('should have a name', () => {
-    expect(pony.name).toBe('John');
-  });
-
-  it('should have a speed', () => {
-    expect(pony.speed).not.toBe(1);
-    expect(pony.speed).toBeGreaterThan(9);
-  });
-});
-
-```
-
----
-
-.page-header[
-  # 05.2
   ##  Test unitaire - Tester un service Angular
 ]
 
@@ -2323,15 +2813,15 @@ L'équipe d'Angular nous met à disposition des méthodes :
 ``` typescript
 import { inject, addProviders } from '@angular/core/testing';
 
-describe('RaceService', () => {
+describe('PlayersService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [RaceService]
+    providers: [PlayersService]
   }));
 
-  it('should return a promise of 2 races', async(inject([RaceService], service => {
-    service.list().then(races => {
-      expect(races.length).toBe(2);
+  it('should return a promise of 2 players', async(inject([PlayersService], (playerService: PlayersService) => {
+    playersService.get().then(players => {
+      expect(players.length).toBe(2);
     });
   })));
 });
@@ -2346,7 +2836,6 @@ Async utilise la notion de Zone d'Angular
   # 05.3
   ##  Test unitaire - Mocker une dépendance
 ]
-
 
 On déclare un faux service :
 
@@ -2363,30 +2852,31 @@ Puis on mock le service via `addProviders` :
 ``` typescript
 import { addProviders, inject } from '@angular/core/testing';
 
-describe('RaceService', () => {
+describe('PlayersService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       { provide: LocalStorageService, useClass: FakeLocalStorage },
-      RaceService
+      PlayersService
     ]
   }));
 
-  it('should return 2 races from localStorage', inject([RaceService], service => {
-    let races = service.list();
-    expect(races.length).toBe(2);
+  it('should return 2 players from localStorage', inject([PlayersService], service => {
+    let players = service.list();
+    expect(players.length).toBe(2);
   }));
 });
 ```
 
 
 ---
-
+template: splited-page
 .page-header[
   # 05.3
   ##  Test unitaire - Tester un composant
 ]
 
+.pull-left[
 #### Pour ce faire nous aurons besoin
 
 - D'instancier notre composant avec `TestComponentBuilder`,
@@ -2394,74 +2884,133 @@ describe('RaceService', () => {
 - D'initialiser un contexte (Given),
 - De déclencher un changement d'état `fixture.detectChange()` (When),
 - Et de tester le resultat produit (Then).
+]
 
+.pull-right[
 #### Notre composant 
 
 ``` typescript
 @Component({
-  selector: 'ns-pony',
-  template: `<img [src]="'/images/pony-' + pony.color.toLowerCase() + '.png'" (click)="clickOnPony()">`
+  selector: 'mn-players',
+  template: '<mn-player *ngFor="let player of players"
+                        [player]="player"
+                        (click)="onPlayerClicked(player)"></mn-player>'
 })
-export class PlayerComponent {
+export class PlayersComponent {
 
-  @Input() pony: PonyModel;
-  @Output() ponyClicked: EventEmitter<PonyModel> = new EventEmitter<PonyModel>();
+  @Ìnput()
+  private players: IPlayer[];
 
-  clickOnPony() {
-    this.ponyClicked.emit(this.pony);
+  @Output()
+  private playerClicked: EventEmitter<IPlayer> = new EventEmitter<IPlayer>();
+
+  private onPlayerClicked(player: IPlayer) {
+    this.playerClicked.emit(player);
   }
-
 }
 ```
-
+]
 ---
 
 .page-header[
   # 05.3
-  ##  Test unitaire - Tester un composant
 ]
 
-#### Notre test
-
+.margin-top-70[
 ``` typescript
-describe('RaceComponent', () => {
-  let fixture: ComponentFixture<RaceComponent>;
+describe('Players Component', () => {
+  const html = '<mn-players></mn-players>';
+  let fixture, comp;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayersComponent, PawnComponent, FaComponent]
+     }).compileComponents();
+  }));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [RaceComponent, PonyComponent]
-    });
-    fixture = TestBed.createComponent(RaceComponent);
+    fixture = TestBed.createComponent(PlayersComponent);
+    comp = fixture.componentInstance;
   });
 
-  it('should have a name and a list of players', () => {
-    // given a component instance with a race input initialized
-    const raceComponent = fixture.componentInstance;
-    raceComponent.race = { name: 'London', players: [{ name: 'John', color: 'BLUE' }] };
+  it ('should instanciate component', () => {
+     expect(fixture.componentInstance instanceof PlayersComponent)
+       .toBe(true, 'should create PlayersComponent');
+  });
 
-    // when we trigger the change detection
+  it('should have expected players', () => {
+    // Given
+    comp.players = [{name: 'Name 0', money: 1500}, {name: 'Name 1', money: 1500}];
+    
+    // When
     fixture.detectChanges();
-
-    // then we should have a name with the race name
-    const element = fixture.nativeElement;
-    expect(element.querySelector('h1').textContent).toBe('London');
-
-    // and a list of players
-    const players = fixture.debugElement.queryAll(By.directive(PonyComponent));
-    expect(players.length).toBe(1);
-    // we can check if the pony is correctly initialized
-    const rainbowDash = players[0].componentInstance.pony;
-    expect(rainbowDash.name).toBe('John');
+    
+    // Then
+    let query: DebugElement[] = fixture.debugElement.queryAll(By.css('.player'));
+    expect(query.length).toBe(2, 'should have 2 players');
   });
 });
 ```
-
+]
 ---
 
 .page-header[
   # 05.2
-  ## Test End to End
+  ## Outillages
 ]
 
+.pull-left[
+#### IDE
+ - Intellij / Webstorm,
+ - SublimeText,
+ - Atom,
+ - Visual Code.
+ 
+#### Packaging
+ - NPM + WebPack,
+ - NPM + System.js (+JSPM),
+ - NPM + Angular-cli.
+
+#### Optimisation SEO
+ - Angular Universal
+ 
+ ]
+ .pull-right[
+#### Boilerplate
+ - Angular quickstart,
+ - AngularClass pour angular2-webpack-starter.
+ 
+#### Les outils
+
+- Tests unitaire : Karma & Jasmine,
+- End to End : Protractor,
+- Qualité de code : TsLint,
+- Couverture de test : Istanbul + karma-remap-coverage,
+- Intégration Continue : Jenkins / Travis / GitLab
+]
+---
+template: end-chapter
+
+
+.end-chapter-container[
+
+.end-chapter-body[
+# Des questions ?
+
+.end-content[
+##### Remerciements
+
+- Valtech Training / https://valtech-training.fr
+- Nicolas Boe / http://nicolas-boe.fr
+- Valtech / [@Valtech_Fr](https://twitter.com/valtech_fr)
+
+##### Me suivre
+
+- Romain Lenzotti / [@RomainLenzotti](http://twitter.fr/@RomainLenzotti)
+
+]
+]
+
+]
 
 
