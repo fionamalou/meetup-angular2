@@ -33,6 +33,10 @@ Durée : 3H
 
 Présentation le : 4 octobre 2016
 
+# Slideshow
+
+La présentation est disponible en ligne [ici](http://romakita.github.io/meetup-angular2).
+
 # Démonstration
 
 Exemple de code ES6 et Typescript dans le dossier `demo`.
