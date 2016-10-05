@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo ES6</title>
+</head>
+<body>
+
+<h1>Demonstration ES6</h1>
+<fieldset>
+    <legend>Let</legend>
+    <button onclick="useVar({name: 'Nicolas', isConnect: true})">use Var</button>
+    <button onclick="useLet({name: 'Nicolas', isConnect: true})">use Let</button>
+</fieldset>
+<fieldset>
+    <legend>Const</legend>
+    <button onclick="setConst()">Set const</button>
+    <button onclick="objetConst()">Object Const</button>
+    <button onclick="arrayConst()">Array Const</button>
+</fieldset>
+<fieldset>
+    <legend>Affectations déstructurées</legend>
+    <button onclick="affectationSimple('Nicolas', true)">Construire un objet</button>
+    <button onclick="affectationSimple2({name: 'Nicolas', isConnect: true})">Affectation</button>
+    <button onclick="affectationComplex()">Affectation Imbriquée</button>
+</fieldset>
+<fieldset>
+    <legend>Parametre optionnel</legend>
+    <button onclick="optionalParameter(10,1)">with parameter (10,1)</button>
+    <button onclick="optionalParameter()">without parameter</button>
+    <button onclick="withObject()">with object</button>
+    <button onclick="extendedParameter(1, 2, "hello", true, 7) === 9()">with object</button>
+</fieldset>
+<fieldset>
+    <legend>Parametre optionnel</legend>
+    <button onclick="tryExtendedParameter()">with object</button>
+</fieldset>
+<br>
+<hr>
+<textarea id="console" cols="30" rows="10" style="width: 100%;">
+</textarea>
+
+
+<script src="es6.js"></script>
+</body>
+</html>

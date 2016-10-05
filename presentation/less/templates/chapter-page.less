@@ -1,0 +1,44 @@
+
+.chapter-page{
+
+  .remark-slide-number{
+    display: none;
+  }
+
+  &.remark-slide-content{
+    background-image: none;
+  }
+
+  .chapter-container {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    .transform(rotate(-29deg) translate(314px, 185px));
+
+    font-family: @font-family;
+    background-repeat: repeat;
+    background-image: url('./../images/chapter-bg.png');
+
+    height: 700px;
+
+    h1 {
+      position:absolute;
+      top: -55px;
+      margin: 0;
+      font-size: 30pt;
+      color:@blue;
+      text-decoration:  underline;
+      //letter-spacing: -2px;
+    }
+
+    h2 {
+      font-weight: bold;
+      color:@blue;
+      margin: 0;
+      font-size: 56pt;
+      line-height: 78px;
+      margin-bottom: 33px;
+    }
+  }
+}

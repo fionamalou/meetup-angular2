@@ -1,0 +1,24 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  ul {
+    margin-bottom: 15px;
+    margin-top: 5px;
+  }
+}
+
+li {
+  padding-left: 1em;
+  text-indent: -.7em;
+  margin-bottom: 5px;
+
+  &:before {
+    content: "- ";
+    color: @blue; /* or whatever color you prefer */
+  }
+
+  li:before{
+    color: black;
+  }
+}
