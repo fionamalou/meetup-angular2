@@ -6,3 +6,5 @@
 /demos/angularCli
 /demos/angular/typings
 .DS_Store
+bin
+lib
