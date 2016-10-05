@@ -66,7 +66,7 @@ class: angular-react-bg
 
 .row[
 
- .col-lg-4[
+ .col-4[
  
    #### Angular 1
    - Google - 2009
@@ -77,19 +77,19 @@ class: angular-react-bg
    - Les tests unitaires !
  ]
   
- .col-lg-4[
+ .col-4[
    #### ReactJS
    
    - Facebook - 2013
    - Le challenger !
    - Mais seulement sur l'aspect Component,
-   - DOM Shadow,
+   - Virtual DOM,
    - Performance et réactif,
    - One way data-binding,
    - Universal JavaScript.
  ]
  
- .col-lg-4[
+ .col-4[
    #### Angular 2
    - Google - 2016
    - Le renouveau ?
@@ -260,7 +260,7 @@ PLAYERS = []; // SyntaxError
 Ce nouveau raccourci permet de créer des objets :
 
 .row[
-.col-sm-6.col-md-6[
+.col-6[
 #### ES5
 ``` javascript
 function createPlayer() {
@@ -274,7 +274,7 @@ function createPlayer() {
 ```
 
 ]
-.col-sm-6.col-md-6[
+.col-6[
 #### ES6
 ``` javascript
 function createPony() {
@@ -609,7 +609,7 @@ class: thin-margin-page-header
 - Plus lisible que les callbacks.
 
 .row[
-.col-sm-6.col-md-6[
+.col-6[
 #### Avec les callbacks
 ``` javascript
 getUser(login, function (user) {
@@ -619,7 +619,7 @@ getUser(login, function (user) {
 });
 ```
 ]
-.col-sm-6.col-md-6[
+.col-6[
 #### Avec les promises
 ``` javascript
 getUser(login)
@@ -651,7 +651,7 @@ getUser(login)
 
 
 .row[
-.col-sm-4.col-md-4[
+.col-4[
 #### 3 états
 
 - Pending (en cours), 
@@ -660,7 +660,7 @@ getUser(login)
 
 ]
 
-.col-sm-8.col-md-8[
+.col-8[
 
 Expose les méthodes `then` et `catch` :
 
@@ -671,7 +671,7 @@ asynchoneFunction()
    //= .then(undefined, siRejetée)
 ```
 ]
-.col-sm-12.col-md-12[
+.col-12[
 #### Exemple de contruction d'une nouvelle promise
 
 ``` javascript
@@ -2416,7 +2416,7 @@ Ne nomme pas tes sélecteurs avec un préfixe bind-, on-, let- ou ref- : ils ont
 
 .row[
 
-.col-lg-4.col-sm-4[
+.col-4[
 
 #### Deux solutions
 
@@ -2433,7 +2433,7 @@ Il y aura trois étapes à réaliser :
 
 ]
 
-.col-lg-8.col-sm-8.margin-top-30[
+.col-8.margin-top-30[
 
 ```typescript
 @Component({
@@ -2573,14 +2573,14 @@ export class OnInitDirective implements OnInit {
 
 .row[
 
-.col-md-6.center[
+.col-6.center[
     
  Data model
   
  ![DataModel](images/angular-2-data-state.jpg)
 ]
 
-.col-md-6.center[
+.col-6.center[
   Components
  ![DataModel](images/angular-2-component-state.jpg)
   
@@ -2608,14 +2608,14 @@ export class OnInitDirective implements OnInit {
 
 .row[
 
-.col-md-6.center[
+.col-6.center[
     
  Data model
   
  ![DataModel](images/angular-2-data-state-change.jpg)
 ]
 
-.col-md-6.center[
+.col-6.center[
   Components
  ![DataModel](images/angular-2-component-state-change.jpg)
   
@@ -2639,7 +2639,7 @@ export class OnInitDirective implements OnInit {
 
 .right-column.margin-top-15[
 .row[
-  .col-md-6.col-sm-6[
+  .col-6[
 #### Détection des changements
 
 - Contrairement à Angular 1, les composants ne peuvent changer le modèle du parent,
@@ -2651,12 +2651,12 @@ export class OnInitDirective implements OnInit {
 
 
   ]
-  .col-md-6.col-sm-6.center[
+  .col-6.center[
    ![DataModel](images/angular-2-change-detection-flow.jpg)   
   ]
  ]
  
- .col-md-12[
+ .col-12[
  > .center[En mode dev, l'algorithme de détection des changements effectue une 2<sup>e</sup> passe pour vérifier d'éventuel effet de bord.]
  ]
 ]
@@ -2881,7 +2881,7 @@ template: splited-page
 ]
 
 .pull-left[
-#### Pour se faire nous aurons besoin
+#### Pour se faire nPour se faire nous aurons besoin
 
 - D'instancier notre composant avec `TestComponentBuilder`,
 - De récupérer une représentation du composant `ComponentFixture`,
